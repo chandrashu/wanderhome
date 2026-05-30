@@ -1,0 +1,241 @@
+/* Compact Airbnb-style create/edit listing form */
+
+.listing-form-page {
+  min-height: auto;
+  display: flex;
+  justify-content: center;
+  padding: 18px 14px;
+  background: #fff;
+}
+
+.listing-form-shell {
+  width: min(100%, 760px);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.listing-preview-panel {
+  position: relative;
+  min-height: 430px;
+  background: #f7f7f7;
+}
+
+.preview-image-wrap,
+.preview-image {
+  width: 100%;
+  height: 100%;
+}
+
+.preview-image {
+  display: block;
+  object-fit: cover;
+}
+
+.listing-preview-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.48), rgba(0,0,0,0.05) 60%);
+}
+
+.preview-card {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 1;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.94);
+}
+
+.preview-eyebrow,
+.form-eyebrow {
+  margin: 0 0 6px;
+  color: #ff385c;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.preview-card h2 {
+  margin: 0 0 6px;
+  color: #222;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.preview-card p {
+  margin: 0;
+  color: #717171;
+  font-size: 12px;
+}
+
+.preview-price {
+  margin-top: 8px;
+  color: #222;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.preview-price span:last-child {
+  color: #717171;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.listing-form-panel {
+  padding: 18px;
+}
+
+.listing-form-heading {
+  margin-bottom: 12px;
+}
+
+.listing-form-heading h1 {
+  margin: 0 0 5px;
+  color: #222;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.listing-form-heading p {
+  margin: 0;
+  color: #717171;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.form-section {
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+
+.form-section h2 {
+  margin: 0 0 8px;
+  color: #222;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.listing-edit-form .mb-3 {
+  margin-bottom: 9px !important;
+}
+
+.listing-edit-form .form-label {
+  margin-bottom: 4px;
+  color: #222;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.listing-edit-form .form-control {
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  color: #222;
+  font-size: 13px;
+  box-shadow: none !important;
+}
+
+.listing-edit-form textarea.form-control {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.listing-edit-form .form-control:focus {
+  border-color: #222;
+  box-shadow: 0 0 0 2px rgba(34,34,34,0.08) !important;
+}
+
+.price-input-wrap {
+  position: relative;
+}
+
+.price-input-wrap span {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  color: #717171;
+  font-size: 13px;
+  font-weight: 700;
+  transform: translateY(-50%);
+}
+
+.price-input-wrap .form-control {
+  padding-left: 28px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.cancel-btn,
+.save-listing-btn {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  border-radius: 9px !important;
+  font-size: 13px;
+  font-weight: 800 !important;
+}
+
+.cancel-btn {
+  border: 1px solid #ddd !important;
+  background: #fff !important;
+  color: #222 !important;
+}
+
+.save-listing-btn {
+  border: 0 !important;
+  background: linear-gradient(135deg, #ff385c, #e61e4d) !important;
+  color: #fff !important;
+}
+
+@media (max-width: 992px) {
+  .listing-form-shell {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .listing-preview-panel {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 576px) {
+  .listing-form-page {
+    padding: 14px 10px;
+  }
+
+  .listing-form-panel {
+    padding: 16px;
+  }
+
+  .listing-form-heading h1 {
+    font-size: 1.25rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-btn,
+  .save-listing-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,116 @@
+<% layout("/layouts/boilerplate") %>
+<% const tagOptions = [
+   "Clean Rooms",
+   "Great Location",
+   "Fast WiFi",
+   "Friendly Host",
+   "Amazing Food",
+   "Peaceful Stay",
+]; %>
+<div class="container review-edit-page">
+   <div class="review-form-box">
+      <div class="listing-form-heading">
+         <p class="form-eyebrow">Your stay experience</p>
+         <h1>Edit your review</h1>
+         <p>Update your rating, notes, tags, or photos for <%= listing.title %>.</p>
+      </div>
+      <form
+         action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=PUT"
+         method="POST"
+         enctype="multipart/form-data"
+         novalidate
+         class="needs-validation"
+      >
+         <div class="mb-4">
+            <label class="form-label fw-semibold">Overall rating</label>
+            <div class="star-rating">
+               <input type="radio" name="review[rating]" value="5" id="rating-5" <%= Number(review.rating) === 5 ? "checked" : "" %> required>
+               <label for="rating-5">★</label>
+               <input type="radio" name="review[rating]" value="4" id="rating-4" <%= Number(review.rating) === 4 ? "checked" : "" %> required>
+               <label for="rating-4">★</label>
+               <input type="radio" name="review[rating]" value="3" id="rating-3" <%= Number(review.rating) === 3 ? "checked" : "" %> required>
+               <label for="rating-3">★</label>
+               <input type="radio" name="review[rating]" value="2" id="rating-2" <%= Number(review.rating) === 2 ? "checked" : "" %> required>
+               <label for="rating-2">★</label>
+               <input type="radio" name="review[rating]" value="1" id="rating-1" <%= Number(review.rating) === 1 ? "checked" : "" %> required>
+               <label for="rating-1">★</label>
+            </div>
+            <div class="invalid-feedback">Please select a rating.</div>
+         </div>
+         <div class="review-breakdown-inputs mb-4">
+            <div>
+               <label class="form-label fw-semibold" for="cleanlinessRating">Cleanliness</label>
+               <select id="cleanlinessRating" name="review[cleanlinessRating]" class="form-select" required>
+                  <% for(let score = 5; score >= 1; score--){ %>
+                     <option value="<%= score %>" <%= Number(review.cleanlinessRating || review.rating) === score ? "selected" : "" %>><%= score %></option>
+                  <% } %>
+               </select>
+            </div>
+            <div>
+               <label class="form-label fw-semibold" for="locationRating">Location</label>
+               <select id="locationRating" name="review[locationRating]" class="form-select" required>
+                  <% for(let score = 5; score >= 1; score--){ %>
+                     <option value="<%= score %>" <%= Number(review.locationRating || review.rating) === score ? "selected" : "" %>><%= score %></option>
+                  <% } %>
+               </select>
+            </div>
+            <div>
+               <label class="form-label fw-semibold" for="valueRating">Value</label>
+               <select id="valueRating" name="review[valueRating]" class="form-select" required>
+                  <% for(let score = 5; score >= 1; score--){ %>
+                     <option value="<%= score %>" <%= Number(review.valueRating || review.rating) === score ? "selected" : "" %>><%= score %></option>
+                  <% } %>
+               </select>
+            </div>
+         </div>
+         <div class="mb-4">
+            <label class="form-label fw-semibold">Helpful tags</label>
+            <div class="review-tags">
+               <% tagOptions.forEach(tag => { %>
+                  <label>
+                     <input type="checkbox" name="review[tags]" value="<%= tag %>" <%= (review.tags || []).includes(tag) ? "checked" : "" %>>
+                     <span><%= tag %></span>
+                  </label>
+               <% }) %>
+            </div>
+         </div>
+         <% if(review.images && review.images.length){ %>
+            <div class="mb-4">
+               <label class="form-label fw-semibold">Current photos</label>
+               <div class="review-image-grid review-image-grid-edit">
+                  <% review.images.forEach(image => { %>
+                     <img src="<%= image.url %>" alt="Review photo">
+                  <% }) %>
+               </div>
+            </div>
+         <% } %>
+         <div class="mb-4">
+            <label class="form-label fw-semibold" for="reviewImages">Replace photos</label>
+            <input
+               id="reviewImages"
+               type="file"
+               name="review[images]"
+               class="form-control"
+               accept="image/*"
+               multiple
+            >
+            <p class="form-text mb-0">Leave empty to keep current photos. Uploading new photos replaces the old set.</p>
+         </div>
+         <div class="mb-4">
+            <label class="form-label fw-semibold" for="reviewComment">Review</label>
+            <textarea
+               id="reviewComment"
+               name="review[comment]"
+               rows="5"
+               class="form-control review-textarea"
+               required
+            ><%= review.comment %></textarea>
+            <div class="invalid-feedback">Please add comments for review.</div>
+         </div>
+         <div class="form-actions">
+            <a href="/listings/<%= listing._id %>" class="btn cancel-btn">Cancel</a>
+            <button class="btn review-submit-btn">Update Review</button>
+         </div>
+      </form>
+   </div>
+</div>

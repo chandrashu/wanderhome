@@ -1,0 +1,220 @@
+<% layout("/layouts/boilerplate") %>
+<div class="listing-form-page">
+  <div class="listing-form-shell">
+    <aside class="listing-preview-panel new-preview-panel">
+      <div class="preview-image-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80"
+          alt="Listing preview"
+          class="preview-image"
+          id="listingImagePreview"
+        >
+      </div>
+      <div class="preview-card">
+        <p class="preview-eyebrow">New listing</p>
+        <h2 id="previewTitle">Your beautiful stay</h2>
+        <p>
+          <span id="previewLocation">Location</span>,
+          <span id="previewCountry">Country</span>
+        </p>
+        <div class="preview-price">
+          ₹ <span id="previewPrice">0</span>
+          <span>/ night</span>
+        </div>
+      </div>
+    </aside>
+    <section class="listing-form-panel">
+      <div class="listing-form-heading">
+        <p class="form-eyebrow">Become a host</p>
+        <h1>Create a new listing</h1>
+        <p>Add the details guests need to understand your place and book with confidence.</p>
+      </div>
+      <form
+        method="POST"
+        action="/listings"
+        enctype="multipart/form-data"
+        novalidate
+        class="needs-validation listing-edit-form"
+      >
+        <div class="form-section">
+          <h2>Basic details</h2>
+          <div class="mb-3">
+            <label class="form-label" for="title">Title</label>
+            <input
+              id="title"
+              name="listing[title]"
+              type="text"
+              class="form-control"
+              placeholder="Cozy beach house with sea view"
+              required
+            >
+            <div class="invalid-feedback">Title should be valid.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <textarea
+              id="description"
+              name="listing[description]"
+              class="form-control"
+              rows="4"
+              placeholder="Describe your place, nearby attractions, and guest experience"
+              required
+            ></textarea>
+            <div class="invalid-feedback">Please enter a short description.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="category">Category</label>
+            <select
+              id="category"
+              name="listing[category]"
+              class="form-select"
+              required
+            >
+              <option value="" selected disabled>Select category</option>
+              <option value="Trending">Trending</option>
+              <option value="Rooms">Rooms</option>
+              <option value="Spiritual">Spiritual</option>
+              <option value="Heritage">Heritage</option>
+              <option value="Nature">Nature</option>
+              <option value="Mountains">Mountains</option>
+              <option value="Beach">Beach</option>
+              <option value="Pools">Pools</option>
+              <option value="Camping">Camping</option>
+              <option value="Farm">Farm</option>
+              <option value="City">City</option>
+            </select>
+            <div class="invalid-feedback">Please choose a category.</div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h2>Photo</h2>
+          <div class="mb-3">
+            <label class="form-label" for="image">Upload image</label>
+            <input
+              id="image"
+              name="listing[image]"
+              type="file"
+              class="form-control"
+              accept="image/*"
+              required
+            >
+            <p class="form-text mb-0">Upload a JPG, PNG, or WebP image up to 15 MB.</p>
+            <div class="invalid-feedback">Please upload a listing image.</div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h2>Price and location</h2>
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label class="form-label" for="price">Price</label>
+              <div class="price-input-wrap">
+                <span>₹</span>
+                <input
+                  id="price"
+                  name="listing[price]"
+                  type="number"
+                  class="form-control"
+                  placeholder="3200"
+                  min="0"
+                  required
+                >
+              </div>
+              <div class="invalid-feedback">Price should be valid.</div>
+            </div>
+            <div class="mb-3 col-md-4">
+              <label class="form-label" for="maxGuests">Max guests</label>
+              <input
+                id="maxGuests"
+                name="listing[maxGuests]"
+                type="number"
+                class="form-control"
+                value="4"
+                min="1"
+                max="16"
+                required
+              >
+              <div class="invalid-feedback">Guests should be between 1 and 16.</div>
+            </div>
+            <div class="mb-3 col-md-4">
+              <label class="form-label" for="country">Country</label>
+              <input
+                id="country"
+                name="listing[country]"
+                type="text"
+                class="form-control"
+                placeholder="India"
+                required
+              >
+              <div class="invalid-feedback">Country name should be valid.</div>
+            </div>
+          </div>
+          <div class="mb-0">
+            <label class="form-label" for="location">Location</label>
+            <input
+              id="location"
+              name="listing[location]"
+              type="text"
+              class="form-control"
+              placeholder="Goa"
+              required
+            >
+            <div class="invalid-feedback">Location should be valid.</div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <a href="/listings" class="btn cancel-btn">
+            Cancel
+          </a>
+          <button class="btn save-listing-btn">
+            Add Listing
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+<script>
+  const fallbackImage = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80";
+  const titleInput = document.querySelector("#title");
+  const imageInput = document.querySelector("#image");
+  const priceInput = document.querySelector("#price");
+  const countryInput = document.querySelector("#country");
+  const locationInput = document.querySelector("#location");
+  const previewTitle = document.querySelector("#previewTitle");
+  const previewImage = document.querySelector("#listingImagePreview");
+  const previewPrice = document.querySelector("#previewPrice");
+  const previewCountry = document.querySelector("#previewCountry");
+  const previewLocation = document.querySelector("#previewLocation");
+  function updatePreviewText(input, preview, fallback) {
+    if (input && preview) {
+      preview.textContent = input.value.trim() || fallback;
+    }
+  }
+  if (titleInput) {
+    titleInput.addEventListener("input", () => {
+      updatePreviewText(titleInput, previewTitle, "Your beautiful stay");
+    });
+  }
+  if (priceInput) {
+    priceInput.addEventListener("input", () => {
+      const value = Number(priceInput.value || 0).toLocaleString("en-IN");
+      previewPrice.textContent = value;
+    });
+  }
+  if (countryInput) {
+    countryInput.addEventListener("input", () => {
+      updatePreviewText(countryInput, previewCountry, "Country");
+    });
+  }
+  if (locationInput) {
+    locationInput.addEventListener("input", () => {
+      updatePreviewText(locationInput, previewLocation, "Location");
+    });
+  }
+  if (imageInput && previewImage) {
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files && imageInput.files[0];
+      previewImage.src = file ? URL.createObjectURL(file) : fallbackImage;
+    });
+  }
+</script>

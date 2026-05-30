@@ -1,0 +1,197 @@
+/* Responsive */
+@media (max-width: 992px) {
+  .navbar {
+    grid-template-columns: 1fr auto;
+    padding: 12px 20px;
+  }
+
+  #searchForm {
+    grid-column: 1 / -1;
+    order: 3;
+    width: 100%;
+  }
+
+  .search-container {
+    max-width: none;
+    width: 100%;
+    margin-left: 0;
+    overflow-x: auto;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .main-image {
+    height: 350px;
+  }
+
+  .small-images {
+    height: 260px;
+  }
+
+  .about-top {
+    flex-direction: column;
+  }
+
+  .price-box {
+    width: 100%;
+    text-align: left;
+  }
+
+  .booking-sticky {
+    position: static;
+  }
+
+  .booking-card {
+    margin-top: 2rem;
+  }
+
+  .review-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .rating-circle {
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .navbar {
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .nav-left {
+    padding-left: 0;
+    font-size: 22px;
+  }
+
+  .search-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 8px;
+    overflow: visible;
+    border-radius: var(--radius-md);
+    box-shadow: none;
+  }
+
+  .field {
+    min-width: 0;
+    padding: 8px 10px;
+  }
+
+  .field:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .field input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .guest-box {
+    position: fixed;
+    top: 148px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    transform: none;
+    animation: none;
+  }
+
+  .category-bar {
+    top: 148px;
+    gap: 22px;
+    padding: 10px 16px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .listing-title {
+    font-size: 1.55rem;
+  }
+
+  .main-image {
+    height: 260px;
+  }
+
+  .small-images {
+    height: 180px;
+  }
+
+  .listing-highlights,
+  .amenities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .amenities-section .d-flex {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .review-form-box,
+  .booking-card {
+    padding: 18px;
+  }
+
+  .rating-breakdown,
+  .review-breakdown-inputs,
+  .review-score-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 500px) {
+  .search-container {
+    grid-template-columns: 1fr;
+    border-radius: var(--radius-md);
+  }
+
+  .field:first-child {
+    grid-column: auto;
+  }
+
+  .search-btn {
+    width: 100%;
+    border-radius: var(--radius-sm);
+  }
+
+  .guest-box {
+    top: 228px;
+  }
+
+  .category-bar {
+    top: 228px;
+  }
+
+  .small-images {
+    display: none;
+  }
+
+  .review-image-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-container {
+    text-align: center;
+  }
+
+  .footer .brand p {
+    margin: auto;
+  }
+}

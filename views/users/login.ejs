@@ -1,0 +1,112 @@
+<% layout("/layouts/boilerplate") %>
+<div class="auth-page">
+   <div class="auth-shell">
+      <div class="auth-panel">
+                 <div class="auth-heading">
+            <p class="auth-eyebrow">Welcome back</p>
+            <h1>Log in to your account</h1>
+            <p>Book stays, save favorites, and manage your trips from one place.</p>
+         </div>
+         <% if(error && error.length){ %>
+            <div class="alert alert-danger auth-alert">
+               <%= error %>
+            </div>
+         <% } %>
+         <% if(success && success.length){ %>
+            <div class="alert alert-success auth-alert">
+               <%= success %>
+            </div>
+         <% } %>
+         <form action="/login" method="POST" class="auth-form needs-validation" novalidate>
+            <div class="mb-3">
+               <label class="form-label" for="username">Username</label>
+               <input
+                  type="text"
+                  class="form-control auth-input"
+                  id="username"
+                  name="username"
+                  placeholder="Enter your username"
+                  autocomplete="username"
+                  required
+               >
+               <div class="invalid-feedback">
+                  Please enter your username.
+               </div>
+            </div>
+            <div class="mb-2">
+               <div class="auth-label-row">
+                  <label class="form-label" for="password">Password</label>
+                  <a href="#" class="auth-link">Forgot password?</a>
+               </div>
+               <div class="password-field">
+                  <input
+                     type="password"
+                     class="form-control auth-input"
+                     id="password"
+                     name="password"
+                     placeholder="Enter your password"
+                     autocomplete="current-password"
+                     required
+                  >
+                  <button class="password-toggle" type="button" aria-label="Show password">
+                     <i class="fa-regular fa-eye"></i>
+                  </button>
+               </div>
+               <div class="invalid-feedback">
+                  Please enter your password.
+               </div>
+            </div>
+            <button class="btn auth-btn w-100 mt-4">
+               Login
+            </button>
+         </form>
+         <div class="auth-divider">
+            <span>or continue with</span>
+         </div>
+         <div class="auth-social-grid">
+            <button class="auth-social-btn" type="button">
+               <i class="fa-brands fa-google"></i>
+               Google
+            </button>
+            <button class="auth-social-btn" type="button">
+               <i class="fa-brands fa-facebook-f"></i>
+               Facebook
+            </button>
+         </div>
+         <p class="auth-footer-text">
+            Do not have an account?
+            <a href="/register">Create account</a>
+         </p>
+      </div>
+      <aside class="auth-visual" aria-label="WanderHome stay preview">
+         <img
+            src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80"
+            alt="Beautiful home stay"
+         >
+         <div class="auth-visual-card">
+            <div>
+               <span class="auth-rating">
+                  <i class="fa-solid fa-star"></i>
+                  4.9
+               </span>
+               <h2>Find your next stay</h2>
+               <p>Comfortable homes, trusted hosts, and memorable trips.</p>
+            </div>
+         </div>
+      </aside>
+   </div>
+</div>
+<script>
+   const passwordToggle = document.querySelector(".password-toggle");
+   const passwordInput = document.querySelector("#password");
+   if(passwordToggle && passwordInput){
+      passwordToggle.addEventListener("click", () => {
+         const isPassword = passwordInput.type === "password";
+         passwordInput.type = isPassword ? "text" : "password";
+         passwordToggle.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+         passwordToggle.innerHTML = isPassword
+            ? '<i class="fa-regular fa-eye-slash"></i>'
+            : '<i class="fa-regular fa-eye"></i>';
+      });
+   }
+</script>

@@ -1,0 +1,99 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container bookings-page">
+   <div class="bookings-header">
+      <div>
+         <p class="bookings-eyebrow">Trips</p>
+         <h1>My bookings</h1>
+         <p>View your confirmed and cancelled stays in one place.</p>
+      </div>
+
+      <a href="/listings" class="btn explore-more-btn">
+         Explore stays
+      </a>
+   </div>
+
+   <% if(bookings && bookings.length){ %>
+      <div class="bookings-grid">
+         <% bookings.forEach(booking => { %>
+            <% if(booking.listing){ %>
+               <article class="booking-card-item">
+                  <a href="/listings/<%= booking.listing._id %>" class="booking-image-link">
+                     <img
+                        src="<%= booking.listing.image %>"
+                        alt="<%= booking.listing.title %>"
+                        class="booking-image"
+                     >
+                  </a>
+
+                  <div class="booking-content">
+                     <div class="booking-title-row">
+                        <div>
+                           <h2>
+                              <a href="/listings/<%= booking.listing._id %>">
+                                 <%= booking.listing.title %>
+                              </a>
+                           </h2>
+                           <p>
+                              <%= booking.listing.location %>, <%= booking.listing.country %>
+                           </p>
+                        </div>
+
+                        <span class="booking-status <%= booking.status %>">
+                           <%= booking.status %>
+                        </span>
+                     </div>
+
+                     <div class="booking-meta-grid">
+                        <div>
+                           <span>Check in</span>
+                           <strong><%= booking.checkIn.toDateString() %></strong>
+                        </div>
+
+                        <div>
+                           <span>Check out</span>
+                           <strong><%= booking.checkOut.toDateString() %></strong>
+                        </div>
+
+                        <div>
+                           <span>Guests</span>
+                           <strong><%= booking.guests %></strong>
+                        </div>
+
+                        <div>
+                           <span>Nights</span>
+                           <strong><%= booking.nights %></strong>
+                        </div>
+                     </div>
+
+                     <div class="booking-price-row">
+                        <span>Total paid</span>
+                        <strong>₹ <%= booking.totalPrice.toLocaleString("en-IN") %></strong>
+                     </div>
+
+                     <% if(booking.status === "confirmed"){ %>
+                        <form
+                           method="POST"
+                           action="/bookings/<%= booking._id %>?_method=DELETE"
+                           class="booking-cancel-form"
+                        >
+                           <button class="btn cancel-booking-btn">
+                              Cancel booking
+                           </button>
+                        </form>
+                     <% } %>
+                  </div>
+               </article>
+            <% } %>
+         <% }) %>
+      </div>
+   <% } else { %>
+      <section class="empty-bookings">
+         <h2>No bookings yet</h2>
+         <p>When you reserve a stay, it will appear here.</p>
+         <a href="/listings" class="btn explore-more-btn">
+            Find a stay
+         </a>
+      </section>
+   <% } %>
+</div>

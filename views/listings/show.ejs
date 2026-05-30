@@ -1,0 +1,573 @@
+<% layout("/layouts/boilerplate") %>
+<% const stats = reviewStats || {
+      count: listing.reviews ? listing.reviews.length : 0,
+      overall: "0.0",
+      cleanliness: "0.0",
+      location: "0.0",
+      value: "0.0",
+      helpfulTags: [],
+   };
+%>
+<div class="container listing-show-page">
+   <h2 class="mb-2 listing-title">
+      <%= listing.title %>
+   </h2>
+   <% if(listing.owner){ %>
+      <p class="text-muted mb-4">
+         Hosted by <b><%= listing.owner.username %></b>
+      </p>
+   <% } %>
+   <div class="row mb-4">
+      <div class="col-lg-12">
+         <div class="image-grid">
+            <div class="main-image">
+               <img src="<%= listing.image %>" alt="<%= listing.title %>">
+            </div>
+            <div class="small-images">
+               <img src="<%= listing.image %>" alt="<%= listing.title %>">
+               <img src="<%= listing.image %>" alt="<%= listing.title %>">
+               <img src="<%= listing.image %>" alt="<%= listing.title %>">
+               <img src="<%= listing.image %>" alt="<%= listing.title %>">
+            </div>
+         </div>
+      </div>
+   </div>
+   <section class="about-section">
+      <div class="about-top">
+         <div>
+            <h2 class="listing-title">
+               <%= listing.title %>
+            </h2>
+            <div class="listing-location">
+               <span>📍</span>
+               <%= listing.location %>, <%= listing.country %>
+            </div>
+         </div>
+         <div class="price-box">
+            <h2>₹ <%= listing.price.toLocaleString("en-IN") %></h2>
+            <span>/ night</span>
+         </div>
+      </div>
+      <div class="listing-highlights">
+         <div class="highlight-item">
+            <span>🏡</span>
+            <div>
+               <h6>Entire Place</h6>
+               <p>You will have the apartment to yourself</p>
+            </div>
+         </div>
+         <div class="highlight-item">
+            <span>👥</span>
+            <div>
+               <h6>4 Guests</h6>
+               <p>Perfect for family and friends</p>
+            </div>
+         </div>
+         <div class="highlight-item">
+            <span>🛏️</span>
+            <div>
+               <h6>2 Bedrooms</h6>
+               <p>Spacious modern bedrooms</p>
+            </div>
+         </div>
+         <div class="highlight-item">
+            <span>🛁</span>
+            <div>
+               <h6>2 Bathrooms</h6>
+               <p>Clean and luxury bathrooms</p>
+            </div>
+         </div>
+      </div>
+      <div class="about-description">
+         <h4>About this place</h4>
+         <p><%= listing.description %></p>
+      </div>
+   </section>
+   <div class="row listing-content-row">
+      <div class="col-lg-8">
+         <section class="amenities-section mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+               <div>
+                  <h3 class="mb-1">What this place offers</h3>
+                  <p class="text-muted mb-0">Everything you need for a comfortable stay</p>
+               </div>
+               <button class="btn btn-outline-dark rounded-pill px-4">
+                  Show all amenities
+               </button>
+            </div>
+            <div class="amenities-grid">
+               <div class="amenity-card">
+                  <div class="amenity-icon">📶</div>
+                  <div>
+                     <h6>Fast Wi-Fi</h6>
+                     <p>High-speed internet for work and streaming</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">🚗</div>
+                  <div>
+                     <h6>Free Parking</h6>
+                     <p>Private parking available on premises</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">🏊</div>
+                  <div>
+                     <h6>Swimming Pool</h6>
+                     <p>Clean luxury pool with relaxing area</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">❄️</div>
+                  <div>
+                     <h6>Air Conditioning</h6>
+                     <p>Fully air-conditioned rooms</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">🍳</div>
+                  <div>
+                     <h6>Modern Kitchen</h6>
+                     <p>Fully equipped kitchen setup</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">📺</div>
+                  <div>
+                     <h6>Smart TV</h6>
+                     <p>Netflix and entertainment ready</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">🧺</div>
+                  <div>
+                     <h6>Washing Machine</h6>
+                     <p>Laundry facility available</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">🛏️</div>
+                  <div>
+                     <h6>Essentials</h6>
+                     <p>Towels, bedsheets and toiletries</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">🛎️</div>
+                  <div>
+                     <h6>24x7 Security</h6>
+                     <p>Safe and secure environment</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">🚿</div>
+                  <div>
+                     <h6>Hot Water</h6>
+                     <p>Available throughout the day</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">♨️</div>
+                  <div>
+                     <h6>Room Heater</h6>
+                     <p>Comfortable stay during winters</p>
+                  </div>
+               </div>
+               <div class="amenity-card">
+                  <div class="amenity-icon">🧯</div>
+                  <div>
+                     <h6>Fire Safety</h6>
+                     <p>Emergency safety equipment installed</p>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section class="map-section mb-5">
+            <h4 class="mb-3">Where you'll be</h4>
+            <div id="map"></div>
+         </section>
+         <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)){ %>
+            <div class="d-flex gap-2 mt-4 mb-5">
+               <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark">
+                  Edit
+               </a>
+               <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                  <button class="btn btn-danger">
+                     Delete
+                  </button>
+               </form>
+            </div>
+         <% } %>
+         <section class="reviews-wrapper mt-5">
+            <div class="review-summary">
+               <div class="rating-circle">
+                  <div class="circle-content">
+                     <h2><%= stats.overall %></h2>
+                     <div class="circle-stars">★★★★★</div>
+                     <p><%= stats.count %> Reviews</p>
+                  </div>
+               </div>
+               <div class="review-info">
+                  <h3 class="mb-3">Guests loved this stay</h3>
+                  <p class="review-subtitle">
+                     Real experiences shared by guests who stayed here recently.
+                  </p>
+                  <div class="rating-breakdown">
+                     <div>
+                        <span>Cleanliness</span>
+                        <strong><%= stats.cleanliness %></strong>
+                     </div>
+                     <div>
+                        <span>Location</span>
+                        <strong><%= stats.location %></strong>
+                     </div>
+                     <div>
+                        <span>Value</span>
+                        <strong><%= stats.value %></strong>
+                     </div>
+                  </div>
+                  <% if(stats.helpfulTags && stats.helpfulTags.length){ %>
+                     <div class="helpful-tags-summary">
+                        <% stats.helpfulTags.forEach(tag => { %>
+                           <span><%= tag.name %> (<%= tag.count %>)</span>
+                        <% }) %>
+                     </div>
+                  <% } %>
+               </div>
+            </div>
+            <% if(currentUser && canReview){ %>
+               <div class="review-form-box mt-5">
+                  <h3 class="mb-4">Leave a Review</h3>
+                  <form
+                     action="/listings/<%= listing._id %>/reviews"
+                     method="POST"
+                     enctype="multipart/form-data"
+                     novalidate
+                     class="needs-validation"
+                  >
+                     <div class="mb-4">
+                        <label class="form-label fw-semibold">Rating</label>
+                        <div class="star-rating">
+                           <input type="radio" name="review[rating]" value="5" id="rating-5" required>
+                           <label for="rating-5">★</label>
+                           <input type="radio" name="review[rating]" value="4" id="rating-4" required>
+                           <label for="rating-4">★</label>
+                           <input type="radio" name="review[rating]" value="3" id="rating-3" required>
+                           <label for="rating-3">★</label>
+                           <input type="radio" name="review[rating]" value="2" id="rating-2" required>
+                           <label for="rating-2">★</label>
+                           <input type="radio" name="review[rating]" value="1" id="rating-1" required>
+                           <label for="rating-1">★</label>
+                        </div>
+                        <div class="invalid-feedback">
+                           Please select a rating.
+                        </div>
+                     </div>
+                     <div class="review-breakdown-inputs mb-4">
+                        <div>
+                           <label class="form-label fw-semibold" for="cleanlinessRating">Cleanliness</label>
+                           <select id="cleanlinessRating" name="review[cleanlinessRating]" class="form-select" required>
+                              <option value="" selected disabled>Rate</option>
+                              <option value="5">5 - Excellent</option>
+                              <option value="4">4 - Very good</option>
+                              <option value="3">3 - Good</option>
+                              <option value="2">2 - Fair</option>
+                              <option value="1">1 - Poor</option>
+                           </select>
+                           <div class="invalid-feedback">Please rate cleanliness.</div>
+                        </div>
+                        <div>
+                           <label class="form-label fw-semibold" for="locationRating">Location</label>
+                           <select id="locationRating" name="review[locationRating]" class="form-select" required>
+                              <option value="" selected disabled>Rate</option>
+                              <option value="5">5 - Excellent</option>
+                              <option value="4">4 - Very good</option>
+                              <option value="3">3 - Good</option>
+                              <option value="2">2 - Fair</option>
+                              <option value="1">1 - Poor</option>
+                           </select>
+                           <div class="invalid-feedback">Please rate location.</div>
+                        </div>
+                        <div>
+                           <label class="form-label fw-semibold" for="valueRating">Value</label>
+                           <select id="valueRating" name="review[valueRating]" class="form-select" required>
+                              <option value="" selected disabled>Rate</option>
+                              <option value="5">5 - Excellent</option>
+                              <option value="4">4 - Very good</option>
+                              <option value="3">3 - Good</option>
+                              <option value="2">2 - Fair</option>
+                              <option value="1">1 - Poor</option>
+                           </select>
+                           <div class="invalid-feedback">Please rate value.</div>
+                        </div>
+                     </div>
+                     <div class="mb-4">
+                        <label class="form-label fw-semibold">What stood out?</label>
+                        <div class="review-tags">
+                           <label>
+                              <input type="checkbox" name="review[tags]" value="Clean Rooms">
+                              <span>Clean Rooms</span>
+                           </label>
+                           <label>
+                              <input type="checkbox" name="review[tags]" value="Great Location">
+                              <span>Great Location</span>
+                           </label>
+                           <label>
+                              <input type="checkbox" name="review[tags]" value="Fast WiFi">
+                              <span>Fast WiFi</span>
+                           </label>
+                           <label>
+                              <input type="checkbox" name="review[tags]" value="Friendly Host">
+                              <span>Friendly Host</span>
+                           </label>
+                           <label>
+                              <input type="checkbox" name="review[tags]" value="Amazing Food">
+                              <span>Amazing Food</span>
+                           </label>
+                           <label>
+                              <input type="checkbox" name="review[tags]" value="Peaceful Stay">
+                              <span>Peaceful Stay</span>
+                           </label>
+                        </div>
+                     </div>
+                     <div class="mb-4">
+                        <label class="form-label fw-semibold" for="reviewImages">Add photos</label>
+                        <input
+                           id="reviewImages"
+                           type="file"
+                           name="review[images]"
+                           class="form-control"
+                           accept="image/*"
+                           multiple
+                        >
+                        <p class="form-text mb-0">Upload up to 3 review photos, 15 MB each.</p>
+                     </div>
+                     <div class="mb-4">
+                        <textarea
+                           name="review[comment]"
+                           rows="5"
+                           class="form-control review-textarea"
+                           placeholder="Share your experience..."
+                           required
+                        ></textarea>
+                        <div class="invalid-feedback">
+                           Please add comments for review.
+                        </div>
+                     </div>
+                     <button class="btn review-submit-btn">
+                        Submit Review
+                     </button>
+                  </form>
+               </div>
+            <% } else { %>
+               <div class="review-form-box mt-5">
+                  <h3 class="mb-2">Leave a Review</h3>
+                  <p class="text-muted mb-0"><%= reviewNotice %></p>
+               </div>
+            <% } %>
+            <div class="all-reviews mt-5">
+               <h3 class="mb-4">All Reviews</h3>
+               <div class="row">
+                  <% listing.reviews.forEach(review => { %>
+                     <div class="col-md-6 mb-4">
+                        <div class="card review-card border-0 h-100">
+                           <div class="card-body">
+                              <div class="d-flex justify-content-between align-items-center mb-3">
+                                 <div>
+                                    <h6 class="fw-bold mb-1">
+                                       <%= review.author ? review.author.username : "Anonymous" %>
+                                    </h6>
+                                    <% if(review.createdAt){ %>
+                                       <small class="text-muted">
+                                          <%= review.createdAt.toDateString() %>
+                                       </small>
+                                    <% } %>
+                                 </div>
+                                 <div class="review-rating-badge">
+                                    ⭐ <%= review.rating %>.0
+                                 </div>
+                              </div>
+                              <div class="review-score-row">
+                                 <% if(review.cleanlinessRating){ %>
+                                    <span>Cleanliness <b><%= review.cleanlinessRating %></b></span>
+                                 <% } %>
+                                 <% if(review.locationRating){ %>
+                                    <span>Location <b><%= review.locationRating %></b></span>
+                                 <% } %>
+                                 <% if(review.valueRating){ %>
+                                    <span>Value <b><%= review.valueRating %></b></span>
+                                 <% } %>
+                              </div>
+                              <% if(review.images && review.images.length){ %>
+                                 <div class="review-image-grid">
+                                    <% review.images.forEach(image => { %>
+                                       <img src="<%= image.url %>" alt="Review photo">
+                                    <% }) %>
+                                 </div>
+                              <% } %>
+                              <p class="review-comment">
+                                 <%= review.comment %>
+                              </p>
+                              <% if(review.tags && review.tags.length){ %>
+                                 <div class="review-tags-show">
+                                    <% review.tags.forEach(tag => { %>
+                                       <span><%= tag %></span>
+                                    <% }) %>
+                                 </div>
+                              <% } %>
+                              <% if(currentUser && review.author && review.author._id.equals(currentUser._id)){ %>
+                                 <div class="review-actions">
+                                    <a
+                                       href="/listings/<%= listing._id %>/reviews/<%= review._id %>/edit"
+                                       class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                                    >
+                                       Edit
+                                    </a>
+                                    <form
+                                       method="POST"
+                                       action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                    >
+                                       <button class="btn btn-dark btn-sm rounded-pill px-3">
+                                          Delete
+                                       </button>
+                                    </form>
+                                 </div>
+                              <% } %>
+                           </div>
+                        </div>
+                     </div>
+                  <% }) %>
+               </div>
+            </div>
+         </section>
+      </div>
+      <div class="col-lg-4 booking-column">
+         <div class="booking-sticky">
+            <div class="booking-card">
+               <h3>
+                  ₹ <%= listing.price.toLocaleString("en-IN") %>
+                  <span class="fs-6 text-muted">/ night</span>
+               </h3>
+               <form
+                  class="mt-4 booking-form"
+                  method="POST"
+                  action="/listings/<%= listing._id %>/bookings"
+               >
+                  <div class="mb-3">
+                     <label class="form-label" for="checkIn">Check In</label>
+                     <input
+                        type="date"
+                        class="form-control"
+                        id="checkIn"
+                        name="booking[checkIn]"
+                        required
+                     >
+                  </div>
+                  <div class="mb-3">
+                     <label class="form-label" for="checkOut">Check Out</label>
+                     <input
+                        type="date"
+                        class="form-control"
+                        id="checkOut"
+                        name="booking[checkOut]"
+                        required
+                     >
+                  </div>
+                  <div class="mb-3">
+                     <label class="form-label" for="bookingGuests">Guests</label>
+                     <select
+                        class="form-select"
+                        id="bookingGuests"
+                        name="booking[guests]"
+                        required
+                     >
+                        <% for(let guestCount = 1; guestCount <= (listing.maxGuests || 4); guestCount++){ %>
+                           <option value="<%= guestCount %>">
+                              <%= guestCount %> Guest<%= guestCount > 1 ? "s" : "" %>
+                           </option>
+                        <% } %>
+                     </select>
+                  </div>
+                  <button class="btn reserve-btn w-100">
+                     Reserve
+                  </button>
+               </form>
+               <hr>
+               <div class="d-flex justify-content-between">
+                  <span>
+                     ₹ <%= listing.price.toLocaleString("en-IN") %> x
+                     <span id="bookingNights">0</span>
+                     nights
+                  </span>
+                  <span id="bookingSubtotal">₹ 0</span>
+               </div>
+               <div class="d-flex justify-content-between">
+                  <span>Service fee</span>
+                  <span>₹ 500</span>
+               </div>
+               <hr>
+               <div class="d-flex justify-content-between fw-bold">
+                  <span>Total</span>
+                  <span id="bookingTotal">₹ 500</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div
+   id="listingPageData"
+   data-coordinates="<%= JSON.stringify(listing.geometry && listing.geometry.coordinates ? listing.geometry.coordinates : [77.2090, 28.6139]) %>"
+   data-title="<%= listing.title %>"
+   data-price="<%= listing.price %>"
+></div>
+<script>
+   const listingPageData = document.querySelector("#listingPageData");
+   let coordinates = JSON.parse(listingPageData?.dataset.coordinates || "[77.209,28.6139]");
+   let listingTitle = listingPageData?.dataset.title || "";
+   const bookingPricePerNight = Number(listingPageData?.dataset.price || 0);
+   const bookingServiceFee = 500;
+</script>
+<script>
+   const checkInInput = document.querySelector("#checkIn");
+   const checkOutInput = document.querySelector("#checkOut");
+   const bookingNights = document.querySelector("#bookingNights");
+   const bookingSubtotal = document.querySelector("#bookingSubtotal");
+   const bookingTotal = document.querySelector("#bookingTotal");
+
+   function formatINR(amount) {
+      return `₹ ${Number(amount || 0).toLocaleString("en-IN")}`;
+   }
+
+   function updateBookingSummary() {
+      if (!checkInInput || !checkOutInput || !bookingNights || !bookingSubtotal || !bookingTotal) {
+         return;
+      }
+
+      const checkIn = new Date(checkInInput.value);
+      const checkOut = new Date(checkOutInput.value);
+      const msPerDay = 1000 * 60 * 60 * 24;
+      const nights = Math.max(0, Math.ceil((checkOut - checkIn) / msPerDay));
+      const subtotal = nights * bookingPricePerNight;
+      const total = nights > 0 ? subtotal + bookingServiceFee : bookingServiceFee;
+
+      bookingNights.textContent = nights;
+      bookingSubtotal.textContent = formatINR(subtotal);
+      bookingTotal.textContent = formatINR(total);
+   }
+
+   if (checkInInput && checkOutInput) {
+      const today = new Date().toISOString().split("T")[0];
+      checkInInput.min = today;
+      checkOutInput.min = today;
+
+      checkInInput.addEventListener("change", () => {
+         checkOutInput.min = checkInInput.value || today;
+         updateBookingSummary();
+      });
+
+      checkOutInput.addEventListener("change", updateBookingSummary);
+   }
+</script>
+<script src="/js/map.js"></script>
+<script src="/js/review.js"></script>

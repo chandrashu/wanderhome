@@ -1,0 +1,94 @@
+<% layout("/layouts/boilerplate") %>
+<div class="auth-page">
+  <div class="auth-shell">
+    <div class="auth-panel">
+     
+      <div class="auth-heading">
+                <h1>Join WanderHome</h1>
+        <p>Book faster, and discover places made for your next trip.</p>
+      </div>
+
+      <% if (error && error.length) { %>
+        <div class="alert alert-danger auth-alert"><%= error %></div>
+      <% } %>
+
+      <form action="/register" method="POST" class="auth-form needs-validation" novalidate>
+        <div class="mb-3">
+          <label class="form-label" for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control auth-input"
+            placeholder="Choose a username"
+            autocomplete="username"
+            required
+          >
+          <div class="invalid-feedback">Please enter a username.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control auth-input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          >
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password">Password</label>
+          <div class="password-field">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control auth-input"
+              placeholder="Create a password"
+              autocomplete="new-password"
+              minlength="6"
+              required
+            >
+            <button class="password-toggle" type="button" aria-label="Show password">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+          <p class="password-hint">Use at least 6 characters.</p>
+          <div class="invalid-feedback">Password must be at least 6 characters.</div>
+        </div>
+        <button class="btn auth-btn w-100 mt-3">Create Account</button>
+      </form>
+      <p class="auth-footer-text">
+        Already have an account?
+        <a href="/login">Login</a>
+      </p>
+    </div>
+    <aside class="auth-visual">
+      <img
+        src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
+        alt="Modern vacation home"
+      >
+      <div class="auth-visual-card">
+        <span><i class="fa-solid fa-star"></i> 4.9 guest rating</span>
+        <h2>Find stays that feel like home</h2>
+        <p>Trusted hosts, beautiful homes, and memorable trips across India.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+<script>
+  const passwordToggle = document.querySelector(".password-toggle");
+  const passwordInput = document.querySelector("#password");
+  if (passwordToggle && passwordInput) {
+    passwordToggle.addEventListener("click", () => {
+      const showPassword = passwordInput.type === "password";
+      passwordInput.type = showPassword ? "text" : "password";
+      passwordToggle.innerHTML = showPassword
+        ? '<i class="fa-regular fa-eye-slash"></i>'
+        : '<i class="fa-regular fa-eye"></i>';
+    });
+  }
+</script>

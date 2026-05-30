@@ -1,0 +1,109 @@
+<% 
+  const currentCategory = typeof category !== "undefined" ? category : "";
+  const currentLocation = typeof location !== "undefined" ? location : "";
+  const currentDate = typeof date !== "undefined" ? date : "";
+  const currentGuests = typeof guests !== "undefined" ? guests : "";
+%>
+
+<header class="navbar">
+  <a href="/" class="nav-left">
+    Wander<span>Home</span>
+  </a>
+
+  <!-- SEARCH BAR -->
+   <form action="/listings" method="GET" id="searchForm">
+
+  <div class="search-container col-md-11" id="searchBar">
+
+    <!-- WHERE -->
+    <div class="field">
+      <span>Where</span>
+      <input
+        type="text"
+        name="location"
+        value="<%= currentLocation %>"
+        placeholder="Search destinations"
+      />
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WHEN -->
+    <div class="field">
+      <span>When</span>
+      <input type="date" name="date" value="<%= currentDate %>" />
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WHO -->
+    <div class="field guest-field" id="guestField">
+      <span>Who</span>
+      <input
+        type="text"
+        id="guestInput"
+        name="guests"
+        value="<%= currentGuests %>"
+        placeholder="Add guests"
+        readonly
+      />
+    </div>
+
+    <!-- SEARCH BUTTON -->
+    <button type="submit" class="search-btn">
+      🔍
+    </button>
+
+  </div>
+
+</form>
+
+   
+    <!-- GUEST DROPDOWN -->
+      <div class="guest-box" id="guestBox"> <div class="row"> <div>
+       <h4>Adults</h4> 
+       <p>Ages 13+</p>
+       </div>
+        <div class="counter">
+           <button onclick="changeGuest('adult', -1)">−</button>
+            <span id="adultCount">1</span>
+             <button onclick="changeGuest('adult', 1)">+</button> 
+            </div>
+           </div>
+            <div class="guest-row"> <div>
+               <h4>Children</h4> <p>Ages 2–12</p>
+               </div> 
+               <div class="counter">
+                 <button onclick="changeGuest('child', -1)">−</button>
+                  <span id="childCount">0</span>
+                   <button onclick="changeGuest('child', 1)">+</button>
+                   </div>
+                   </div>
+                   </div>
+                   </div>
+
+  <!-- RIGHT MENU -->
+  <div class="nav-right">
+    <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
+
+    <div id="hamburgerDropdown" class="hamburger-dropdown">
+      <% if (currentUser) { %>
+        <div class="menu-user">
+          👤 <%= currentUser.username %>
+        </div>
+
+        <a href="/listings/new">➕ Add New Listing</a>
+        <a href="/listings/mine">My listings</a>
+        <a href="/bookings">My bookings</a>
+        <a href="/listings/wishlist">My wishlist</a>
+        <hr>
+        <a href="/logout" class="logout">🚪 Logout</a>
+      <% } else { %>
+        <a href="/login">👤 Login</a>
+        <a href="/register">📝 Register</a>
+      <% } %>
+    </div>
+  </div>
+</header>
+
+

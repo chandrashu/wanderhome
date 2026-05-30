@@ -1,0 +1,80 @@
+<% layout("/layouts/boilerplate") %>
+<div class="container listing-index-page mt-4">
+   <% if(allListings && allListings.length){ %>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+         <% for(let listing of allListings){ %>
+            <% const averageRating = getAverageRating(listing.reviews); %>
+            <% const isSaved = currentUser && currentUser.wishlist && currentUser.wishlist.some(savedId => savedId.toString() === listing._id.toString()); %>
+            <div class="col">
+               <div class="card listing-card h-100">
+                  <div class="img-wrapper">
+                     <a href="/listings/<%= listing._id %>" class="listing-image-link">
+                        <img
+                           src="<%= listing.image %>"
+                           class="card-img-top listing-img"
+                           alt="<%= listing.title %>"
+                           loading="lazy"
+                        >
+                     </a>
+                     <form
+                        method="POST"
+                        action="/listings/<%= listing._id %>/wishlist"
+                        class="wishlist-form"
+                     >
+                        <button
+                           class="wishlist-btn <%= isSaved ? 'active' : '' %>"
+                           type="submit"
+                           aria-label="<%= isSaved ? 'Remove from wishlist' : 'Add to wishlist' %>"
+                        >
+                           <i class="<%= isSaved ? 'fa-solid' : 'fa-regular' %> fa-heart"></i>
+                        </button>
+                     </form>
+                  </div>
+                  <div class="card-body listing-card-body">
+                     <div class="listing-card-top">
+                        <a href="/listings/<%= listing._id %>" class="listing-card-title">
+                           <%= listing.title %>
+                        </a>
+                        <span class="listing-card-rating">
+                           <i class="fa-solid fa-star"></i>
+                           <% if(listing.reviews && listing.reviews.length){ %>
+                              <%= averageRating %>
+                           <% } else { %>
+                              New
+                           <% } %>
+                        </span>
+                     </div>
+                     <p class="listing-card-location">
+                        <%= listing.location || "India" %>
+                        <% if(listing.country){ %>
+                           , <%= listing.country %>
+                        <% } %>
+                     </p>
+                     <p class="listing-card-meta">
+                        Hosted stay
+                        <% if(listing.maxGuests){ %>
+                           &middot; up to <%= listing.maxGuests %> guests
+                        <% } %>
+                        <% if(listing.reviews && listing.reviews.length){ %>
+                           · <%= listing.reviews.length %> reviews
+                        <% } %>
+                     </p>
+                     <p class="listing-card-price">
+                        <span>₹ <%= listing.price.toLocaleString("en-IN") %></span>
+                        night
+                     </p>
+                  </div>
+               </div>
+            </div>
+         <% } %>
+      </div>
+   <% } else { %>
+      <section class="empty-listings">
+         <h2>No stays found</h2>
+         <p>Try changing your search or add a new listing.</p>
+         <a href="/listings/new" class="btn empty-listings-btn">
+            Add Listing
+         </a>
+      </section>
+   <% } %>
+</div>

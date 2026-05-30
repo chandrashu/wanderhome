@@ -1,0 +1,83 @@
+<!-- ================= CATEGORY BAR ================= -->
+
+<section class="category-bar">
+
+  <a href="/listings"
+     class="category-item <%= currentCategory === '' ? 'active' : '' %>">
+    <i class="fa-solid fa-border-all"></i>
+    <span>All</span>
+  </a>
+
+  <a href="/listings?category=Trending"
+     class="category-item <%= currentCategory === 'Trending' ? 'active' : '' %>">
+    <i class="fa-solid fa-fire"></i>
+    <span>Trending</span>
+  </a>
+
+  <a href="/listings?category=Rooms"
+     class="category-item <%= currentCategory === 'Rooms' ? 'active' : '' %>">
+    <i class="fa-solid fa-bed"></i>
+    <span>Rooms</span>
+  </a>
+
+  <a href="/listings?category=Spiritual"
+     class="category-item <%= currentCategory === 'Spiritual' ? 'active' : '' %>">
+    <i class="fa-solid fa-om"></i>
+    <span>Spiritual</span>
+  </a>
+
+  <a href="/listings?category=Heritage"
+     class="category-item <%= currentCategory === 'Heritage' ? 'active' : '' %>">
+    <i class="fa-solid fa-landmark"></i>
+    <span>Heritage</span>
+  </a>
+
+  <a href="/listings?category=Nature"
+     class="category-item <%= currentCategory === 'Nature' ? 'active' : '' %>">
+    <i class="fa-solid fa-tree"></i>
+    <span>Nature</span>
+  </a>
+
+  <a href="/listings?category=Mountains"
+     class="category-item <%= currentCategory === 'Mountains' ? 'active' : '' %>">
+    <i class="fa-solid fa-mountain"></i>
+    <span>Mountains</span>
+  </a>
+
+  <a href="/listings?category=Beach"
+     class="category-item <%= currentCategory === 'Beach' ? 'active' : '' %>">
+    <i class="fa-solid fa-umbrella-beach"></i>
+    <span>Beach</span>
+  </a>
+
+  <a href="/listings?category=Pools"
+     class="category-item <%= currentCategory === 'Pools' ? 'active' : '' %>">
+    <i class="fa-solid fa-water-ladder"></i>
+    <span>Pools</span>
+  </a>
+
+  <a href="/listings?category=Camping"
+     class="category-item <%= currentCategory === 'Camping' ? 'active' : '' %>">
+    <i class="fa-solid fa-campground"></i>
+    <span>Camping</span>
+  </a>
+
+  <a href="/listings?category=Farm"
+     class="category-item <%= currentCategory === 'Farm' ? 'active' : '' %>">
+    <i class="fa-solid fa-tractor"></i>
+    <span>Farms</span>
+  </a>
+
+  <a href="/listings?category=City"
+     class="category-item <%= currentCategory === 'City' ? 'active' : '' %>">
+    <i class="fa-solid fa-city"></i>
+    <span>City</span>
+  </a>
+
+  <a href="/listings/new" class="category-item new-listing">
+    <i class="fa-solid fa-plus"></i>
+    <span>New</span>
+  </a>
+
+  
+</section>

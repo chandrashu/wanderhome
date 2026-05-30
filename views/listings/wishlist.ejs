@@ -1,0 +1,95 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container listing-index-page wishlist-page mt-4">
+   <div class="wishlist-header">
+      <div>
+         <p class="wishlist-eyebrow">Saved stays</p>
+         <h1>My wishlist</h1>
+         <p>Your favorite homes are collected here.</p>
+      </div>
+
+      <a href="/listings" class="btn explore-more-btn">
+         Explore more
+      </a>
+   </div>
+
+   <% if(wishlist && wishlist.length){ %>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+         <% for(let listing of wishlist){ %>
+            <% const averageRating = getAverageRating(listing.reviews); %>
+
+            <div class="col">
+               <div class="card listing-card h-100">
+                  <div class="img-wrapper">
+                     <a href="/listings/<%= listing._id %>" class="listing-image-link">
+                        <img
+                           src="<%= listing.image %>"
+                           class="card-img-top listing-img"
+                           alt="<%= listing.title %>"
+                           loading="lazy"
+                        >
+                     </a>
+
+                     <form
+                        method="POST"
+                        action="/listings/<%= listing._id %>/wishlist"
+                        class="wishlist-form"
+                     >
+                        <button class="wishlist-btn active" type="submit" aria-label="Remove from wishlist">
+                           <i class="fa-solid fa-heart"></i>
+                        </button>
+                     </form>
+                  </div>
+
+                  <div class="card-body listing-card-body">
+                     <div class="listing-card-top">
+                        <a href="/listings/<%= listing._id %>" class="listing-card-title">
+                           <%= listing.title %>
+                        </a>
+
+                        <span class="listing-card-rating">
+                           <i class="fa-solid fa-star"></i>
+                           <% if(listing.reviews && listing.reviews.length){ %>
+                              <%= averageRating %>
+                           <% } else { %>
+                              New
+                           <% } %>
+                        </span>
+                     </div>
+
+                     <p class="listing-card-location">
+                        <%= listing.location || "India" %>
+                        <% if(listing.country){ %>
+                           , <%= listing.country %>
+                        <% } %>
+                     </p>
+
+                     <p class="listing-card-meta">
+                        Saved stay
+                        <% if(listing.maxGuests){ %>
+                           &middot; up to <%= listing.maxGuests %> guests
+                        <% } %>
+                        <% if(listing.reviews && listing.reviews.length){ %>
+                           · <%= listing.reviews.length %> reviews
+                        <% } %>
+                     </p>
+
+                     <p class="listing-card-price">
+                        <span>₹ <%= listing.price.toLocaleString("en-IN") %></span>
+                        night
+                     </p>
+                  </div>
+               </div>
+            </div>
+         <% } %>
+      </div>
+   <% } else { %>
+      <section class="empty-listings">
+         <h2>No saved stays yet</h2>
+         <p>Tap the heart on any listing to save it here.</p>
+         <a href="/listings" class="btn empty-listings-btn">
+            Browse stays
+         </a>
+      </section>
+   <% } %>
+</div>

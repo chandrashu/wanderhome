@@ -1,0 +1,88 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container host-listings-page">
+   <div class="host-listings-header">
+      <div>
+         <p class="host-listings-eyebrow">Host dashboard</p>
+         <h1>My listings</h1>
+         <p>Manage the stays you host on WanderHome.</p>
+      </div>
+      <a href="/listings/new" class="btn host-add-btn">
+         Add Listing
+      </a>
+   </div>
+
+   <% if(listings && listings.length){ %>
+      <div class="host-listings-grid">
+         <% listings.forEach(listing => { %>
+            <% const averageRating = getAverageRating(listing.reviews); %>
+            <% const bookingCount = bookingCountByListing[listing._id.toString()] || 0; %>
+            <article class="host-listing-card">
+               <a href="/listings/<%= listing._id %>" class="host-listing-image-link">
+                  <img
+                     src="<%= listing.image %>"
+                     alt="<%= listing.title %>"
+                     class="host-listing-image"
+                     loading="lazy"
+                  >
+               </a>
+               <div class="host-listing-content">
+                  <div class="host-listing-title-row">
+                     <div>
+                        <h2>
+                           <a href="/listings/<%= listing._id %>">
+                              <%= listing.title %>
+                           </a>
+                        </h2>
+                        <p><%= listing.location %>, <%= listing.country %></p>
+                     </div>
+                     <span class="host-listing-category"><%= listing.category || "Rooms" %></span>
+                  </div>
+
+                  <div class="host-listing-stats">
+                     <div>
+                        <span>Price</span>
+                        <strong>₹ <%= listing.price.toLocaleString("en-IN") %></strong>
+                     </div>
+                     <div>
+                        <span>Guests</span>
+                        <strong><%= listing.maxGuests || 4 %></strong>
+                     </div>
+                     <div>
+                        <span>Bookings</span>
+                        <strong><%= bookingCount %></strong>
+                     </div>
+                     <div>
+                        <span>Rating</span>
+                        <strong>
+                           <% if(listing.reviews && listing.reviews.length){ %>
+                              <%= averageRating %>
+                           <% } else { %>
+                              New
+                           <% } %>
+                        </strong>
+                     </div>
+                  </div>
+
+                  <div class="host-listing-actions">
+                     <a href="/listings/<%= listing._id %>" class="btn host-view-btn">
+                        View
+                     </a>
+                     <a href="/listings/<%= listing._id %>/edit" class="btn host-edit-btn">
+                        Edit
+                     </a>
+                  </div>
+               </div>
+            </article>
+         <% }) %>
+      </div>
+   <% } else { %>
+      <section class="empty-host-listings">
+         <h2>No listings yet</h2>
+         <p>Create your first stay and it will show up here.</p>
+         <a href="/listings/new" class="btn host-add-btn">
+            Add Listing
+         </a>
+      </section>
+   <% } %>
+</div>

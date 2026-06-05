@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const passportLocalMongoose = require("passport-local-mongoose");
 
-// 🔥 unwrap plugin correctly for Node 24+
+// Normalize CommonJS/ESM interop for newer Node versions.
 const plugin =
   typeof passportLocalMongoose === "function"
     ? passportLocalMongoose

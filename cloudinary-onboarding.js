@@ -1,12 +1,27 @@
 #!/usr/bin/env node
 
+require("dotenv").config();
 const { v2: cloudinary } = require("cloudinary");
 
-cloudinary.config({
-  cloud_name: "dkxollny8",
-  api_key: "443928343517831",
-  api_secret: "XWGmmRFU1LoNODfFHWwmISRyhYk",
-});
+const hasCloudinaryUrl = Boolean(process.env.CLOUDINARY_URL);
+const hasSeparateCloudinaryConfig =
+  process.env.CLOUDINARY_CLOUD_NAME &&
+  process.env.CLOUDINARY_API_KEY &&
+  process.env.CLOUDINARY_API_SECRET;
+
+if (hasCloudinaryUrl) {
+  cloudinary.config(true);
+} else if (hasSeparateCloudinaryConfig) {
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+} else {
+  throw new Error(
+    "Set CLOUDINARY_URL or CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET before running this script."
+  );
+}
 
 async function main() {
   const sampleImageUrl =

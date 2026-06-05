@@ -4,7 +4,7 @@
 
 - Service type: Web Service
 - Runtime: Node
-- Build command: `npm install`
+- Build command: `npm ci`
 - Start command: `npm start`
 - Health check path: `/healthz`
 
@@ -28,3 +28,5 @@ GEOCODING_USER_AGENT=WanderHome/1.0 your-email@example.com
 - `MONGO_URL` must be a hosted MongoDB URL, such as MongoDB Atlas. Do not use `mongodb://127.0.0.1...` in production.
 - The project includes `render.yaml`, so Render can read the web service settings from the repo.
 - After deploy, open `/healthz`. It should show `ok`.
+- To refresh seed listings locally, run `npm run seed`. In production, run `npm run seed -- --force` only when you intentionally want to replace listing data.
+- To repair known broken listing image URLs without reseeding, run `npm run repair:images`.

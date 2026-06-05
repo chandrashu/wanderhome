@@ -10,6 +10,7 @@
     "start": "node app.js",
     "dev": "node app.js",
     "seed": "node init/index.js",
+    "repair:images": "node utils/repairListingImages.js",
     "test": "node --check app.js"
   },
   "keywords": [],

@@ -23,6 +23,7 @@
                         src="<%= booking.listing.image %>"
                         alt="<%= booking.listing.title %>"
                         class="booking-image"
+                        onerror="this.onerror=null;this.src='/images/listing-fallback.jpg';"
                      >
                   </a>
 

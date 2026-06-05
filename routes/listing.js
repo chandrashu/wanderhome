@@ -68,8 +68,13 @@ const hasLocationChanged = (listing, nextListingData) => {
 
 // INDEX + SEARCH (ONLY ONE ROUTE)
 router.get("/", wrapAsync(async (req, res) => {
-  const { category, location, date, guests } = req.query;
+  const { category, location, date, guests, sort } = req.query;
   const guestCount = getGuestCount(guests);
+  const sortOptions = {
+    price_asc: { price: 1, _id: -1 },
+    price_desc: { price: -1, _id: -1 },
+    newest: { _id: -1 },
+  };
 
   let query = {};
 
@@ -112,8 +117,13 @@ router.get("/", wrapAsync(async (req, res) => {
     }
   }
 
-  const allListings = await Listing.find(query)
-    .populate("reviews");
+  const listingsQuery = Listing.find(query).populate("reviews");
+
+  if (sortOptions[sort]) {
+    listingsQuery.sort(sortOptions[sort]);
+  }
+
+  const allListings = await listingsQuery;
 
   res.render("listings/index", {
     allListings,
@@ -121,6 +131,7 @@ router.get("/", wrapAsync(async (req, res) => {
     location,
     date,
     guests,
+    sort: sortOptions[sort] ? sort : "",
     getAverageRating
   });
 }));

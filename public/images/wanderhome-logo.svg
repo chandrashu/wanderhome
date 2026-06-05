@@ -1,0 +1,17 @@
+<svg width="270" height="64" viewBox="0 0 270 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="markGradient" x1="8" y1="8" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF385C"/>
+      <stop offset="0.55" stop-color="#EF4E7B"/>
+      <stop offset="1" stop-color="#0EA5A3"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="18" fill="url(#markGradient)"/>
+  <path d="M18 33.5L32 21L46 33.5" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 32V45H42V32" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M29 45V37H35V45" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="47" cy="18" r="5" fill="white" fill-opacity="0.96"/>
+  <text x="76" y="39" fill="#222222" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="0">Wander</text>
+  <text x="184" y="39" fill="#FF385C" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="0">Home</text>
+  <path d="M78 48H190" stroke="#0EA5A3" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 8"/>
+</svg>

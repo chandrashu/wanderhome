@@ -1,83 +1,146 @@
+<%
+  const activeCategory = typeof currentCategory !== "undefined" ? currentCategory : "";
+  const activeSort = typeof sort !== "undefined" ? sort : "";
+  const activeLocation = typeof location !== "undefined" ? location : "";
+  const activeDate = typeof date !== "undefined" ? date : "";
+  const activeGuests = typeof guests !== "undefined" ? guests : "";
+
+  const categories = [
+    { label: "All", value: "", icon: "fa-border-all" },
+    { label: "Trending", value: "Trending", icon: "fa-fire" },
+    { label: "Rooms", value: "Rooms", icon: "fa-bed" },
+    { label: "Spiritual", value: "Spiritual", icon: "fa-om" },
+    { label: "Heritage", value: "Heritage", icon: "fa-landmark" },
+    { label: "Nature", value: "Nature", icon: "fa-tree" },
+    { label: "Mountains", value: "Mountains", icon: "fa-mountain" },
+    { label: "Beach", value: "Beach", icon: "fa-umbrella-beach" },
+    { label: "Pools", value: "Pools", icon: "fa-water-ladder" },
+    { label: "Camping", value: "Camping", icon: "fa-campground" },
+    { label: "Farms", value: "Farm", icon: "fa-tractor" },
+    { label: "City", value: "City", icon: "fa-city" },
+  ];
+
+  const sortOptions = [
+    { label: "Recommended", value: "", icon: "fa-star" },
+    { label: "Price low to high", value: "price_asc", icon: "fa-arrow-down-1-9" },
+    { label: "Price high to low", value: "price_desc", icon: "fa-arrow-up-9-1" },
+    { label: "Newest first", value: "newest", icon: "fa-clock" },
+  ];
+
+  const listingQueryPath = (updates = {}) => {
+    const params = new URLSearchParams();
+    const values = {
+      category: activeCategory,
+      location: activeLocation,
+      date: activeDate,
+      guests: activeGuests,
+      sort: activeSort,
+      ...updates,
+    };
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (value) {
+        params.set(key, value);
+      }
+    });
+
+    const query = params.toString();
+    return `/listings${query ? `?${query}` : ""}`;
+  };
+%>
+
 <!-- ================= CATEGORY BAR ================= -->
-
 <section class="category-bar">
-
-  <a href="/listings"
-     class="category-item <%= currentCategory === '' ? 'active' : '' %>">
-    <i class="fa-solid fa-border-all"></i>
-    <span>All</span>
-  </a>
-
-  <a href="/listings?category=Trending"
-     class="category-item <%= currentCategory === 'Trending' ? 'active' : '' %>">
-    <i class="fa-solid fa-fire"></i>
-    <span>Trending</span>
-  </a>
-
-  <a href="/listings?category=Rooms"
-     class="category-item <%= currentCategory === 'Rooms' ? 'active' : '' %>">
-    <i class="fa-solid fa-bed"></i>
-    <span>Rooms</span>
-  </a>
-
-  <a href="/listings?category=Spiritual"
-     class="category-item <%= currentCategory === 'Spiritual' ? 'active' : '' %>">
-    <i class="fa-solid fa-om"></i>
-    <span>Spiritual</span>
-  </a>
-
-  <a href="/listings?category=Heritage"
-     class="category-item <%= currentCategory === 'Heritage' ? 'active' : '' %>">
-    <i class="fa-solid fa-landmark"></i>
-    <span>Heritage</span>
-  </a>
-
-  <a href="/listings?category=Nature"
-     class="category-item <%= currentCategory === 'Nature' ? 'active' : '' %>">
-    <i class="fa-solid fa-tree"></i>
-    <span>Nature</span>
-  </a>
-
-  <a href="/listings?category=Mountains"
-     class="category-item <%= currentCategory === 'Mountains' ? 'active' : '' %>">
-    <i class="fa-solid fa-mountain"></i>
-    <span>Mountains</span>
-  </a>
-
-  <a href="/listings?category=Beach"
-     class="category-item <%= currentCategory === 'Beach' ? 'active' : '' %>">
-    <i class="fa-solid fa-umbrella-beach"></i>
-    <span>Beach</span>
-  </a>
-
-  <a href="/listings?category=Pools"
-     class="category-item <%= currentCategory === 'Pools' ? 'active' : '' %>">
-    <i class="fa-solid fa-water-ladder"></i>
-    <span>Pools</span>
-  </a>
-
-  <a href="/listings?category=Camping"
-     class="category-item <%= currentCategory === 'Camping' ? 'active' : '' %>">
-    <i class="fa-solid fa-campground"></i>
-    <span>Camping</span>
-  </a>
-
-  <a href="/listings?category=Farm"
-     class="category-item <%= currentCategory === 'Farm' ? 'active' : '' %>">
-    <i class="fa-solid fa-tractor"></i>
-    <span>Farms</span>
-  </a>
-
-  <a href="/listings?category=City"
-     class="category-item <%= currentCategory === 'City' ? 'active' : '' %>">
-    <i class="fa-solid fa-city"></i>
-    <span>City</span>
-  </a>
+  <% categories.forEach((item) => { %>
+    <a
+      href="<%= listingQueryPath({ category: item.value }) %>"
+      class="category-item <%= activeCategory === item.value ? 'active' : '' %>"
+    >
+      <i class="fa-solid <%= item.icon %>"></i>
+      <span><%= item.label %></span>
+    </a>
+  <% }) %>
 
   <a href="/listings/new" class="category-item new-listing">
     <i class="fa-solid fa-plus"></i>
     <span>New</span>
   </a>
+</section>
 
-  
+<nav class="mobile-bottom-actions" aria-label="Listing controls">
+  <button
+    type="button"
+    class="mobile-action-btn"
+    data-mobile-panel-toggle="filter"
+    aria-expanded="false"
+    aria-controls="mobileFilterPanel"
+  >
+    <i class="fa-solid fa-sliders"></i>
+    <span>Filter</span>
+  </button>
+  <button
+    type="button"
+    class="mobile-action-btn"
+    data-mobile-panel-toggle="sort"
+    aria-expanded="false"
+    aria-controls="mobileSortPanel"
+  >
+    <i class="fa-solid fa-arrow-up-wide-short"></i>
+    <span>Sort</span>
+  </button>
+</nav>
+
+<section
+  class="mobile-control-panel"
+  id="mobileFilterPanel"
+  data-mobile-panel="filter"
+  aria-hidden="true"
+>
+  <div class="mobile-panel-handle"></div>
+  <div class="mobile-panel-header">
+    <h3>Filter</h3>
+    <button type="button" class="mobile-panel-close" data-mobile-panel-close aria-label="Close filter">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="mobile-filter-grid">
+    <% categories.forEach((item) => { %>
+      <a
+        href="<%= listingQueryPath({ category: item.value }) %>"
+        class="mobile-filter-chip <%= activeCategory === item.value ? 'active' : '' %>"
+      >
+        <i class="fa-solid <%= item.icon %>"></i>
+        <span><%= item.label %></span>
+      </a>
+    <% }) %>
+  </div>
+</section>
+
+<section
+  class="mobile-control-panel"
+  id="mobileSortPanel"
+  data-mobile-panel="sort"
+  aria-hidden="true"
+>
+  <div class="mobile-panel-handle"></div>
+  <div class="mobile-panel-header">
+    <h3>Sort</h3>
+    <button type="button" class="mobile-panel-close" data-mobile-panel-close aria-label="Close sort">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="mobile-sort-list">
+    <% sortOptions.forEach((item) => { %>
+      <a
+        href="<%= listingQueryPath({ sort: item.value }) %>"
+        class="mobile-sort-option <%= activeSort === item.value ? 'active' : '' %>"
+      >
+        <i class="fa-solid <%= item.icon %>"></i>
+        <span><%= item.label %></span>
+        <% if (activeSort === item.value) { %>
+          <i class="fa-solid fa-check"></i>
+        <% } %>
+      </a>
+    <% }) %>
+  </div>
 </section>

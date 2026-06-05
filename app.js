@@ -25,29 +25,27 @@ const bookingRoutes = require("./routes/booking");
 
 
 
-const MONGO_URL = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wanderhome";
+const DEFAULT_MONGO_URL = "mongodb://127.0.0.1:27017/wanderhome";
+const MONGO_URL = process.env.MONGO_URL || DEFAULT_MONGO_URL;
 const PORT = process.env.PORT || 8080;
 const SESSION_SECRET = process.env.SESSION_SECRET || "wanderhome-secret";
 const isProduction = process.env.NODE_ENV === "production";
+
+if (isProduction && !process.env.MONGO_URL) {
+        throw new Error("MONGO_URL must be set in production.");
+}
 
 if (isProduction && SESSION_SECRET === "wanderhome-secret") {
         throw new Error("SESSION_SECRET must be set to a strong value in production.");
 }
 
-main()
-.then(() => {
-        console.log("connected to DB");
-})
-.catch((err) => {
-        console.error("DB connection error:", err.message);
-});
-
 async function main() {
-      await mongoose.connect(MONGO_URL)  
+      await mongoose.connect(MONGO_URL);
 }
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.disable("x-powered-by");
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
@@ -129,6 +127,14 @@ app.use((err, req, res, next) => {
         // res.status(statusCode).send(message);
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-        console.log(`server is listening to port ${PORT}`);
-});
+main()
+        .then(() => {
+                console.log("connected to DB");
+                app.listen(PORT, "0.0.0.0", () => {
+                        console.log(`server is listening to port ${PORT}`);
+                });
+        })
+        .catch((err) => {
+                console.error("DB connection error:", err.message);
+                process.exit(1);
+        });

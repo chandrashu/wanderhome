@@ -1,109 +1,133 @@
-<% 
+<%
   const currentCategory = typeof category !== "undefined" ? category : "";
   const currentLocation = typeof location !== "undefined" ? location : "";
   const currentDate = typeof date !== "undefined" ? date : "";
   const currentGuests = typeof guests !== "undefined" ? guests : "";
 %>
 
-<header class="navbar">
-  <a href="/" class="nav-left">
-    Wander<span>Home</span>
+<header class="navbar app-navbar">
+  <a href="/" class="nav-left brand-link" aria-label="WanderHome home">
+    <picture>
+      <source media="(max-width: 520px)" srcset="/images/wanderhome-mark.svg">
+      <img src="/images/wanderhome-logo.svg" alt="WanderHome" class="brand-logo">
+    </picture>
   </a>
 
-  <!-- SEARCH BAR -->
-   <form action="/listings" method="GET" id="searchForm">
+  <form action="/listings" method="GET" id="searchForm" class="nav-search-form">
+    <div class="search-container" id="searchBar" role="search">
+      <div class="field">
+        <label for="navLocation">Where</label>
+        <input
+          id="navLocation"
+          type="text"
+          name="location"
+          value="<%= currentLocation %>"
+          placeholder="Search destinations"
+        />
+      </div>
 
-  <div class="search-container col-md-11" id="searchBar">
+      <div class="divider"></div>
 
-    <!-- WHERE -->
-    <div class="field">
-      <span>Where</span>
-      <input
-        type="text"
-        name="location"
-        value="<%= currentLocation %>"
-        placeholder="Search destinations"
-      />
+      <div class="field">
+        <label for="navDate">When</label>
+        <input id="navDate" type="date" name="date" value="<%= currentDate %>" />
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field guest-field" id="guestField">
+        <label for="guestInput">Who</label>
+        <input
+          type="text"
+          id="guestInput"
+          name="guests"
+          value="<%= currentGuests %>"
+          placeholder="Add guests"
+          readonly
+        />
+      </div>
+
+      <button type="submit" class="search-btn" aria-label="Search listings">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
     </div>
+  </form>
 
-    <div class="divider"></div>
-
-    <!-- WHEN -->
-    <div class="field">
-      <span>When</span>
-      <input type="date" name="date" value="<%= currentDate %>" />
+  <div class="guest-box" id="guestBox" aria-label="Guest selector">
+    <div class="guest-row">
+      <div>
+        <h4>Adults</h4>
+        <p>Ages 13+</p>
+      </div>
+      <div class="counter">
+        <button type="button" onclick="changeGuest('adult', -1)" aria-label="Remove adult">-</button>
+        <span id="adultCount">1</span>
+        <button type="button" onclick="changeGuest('adult', 1)" aria-label="Add adult">+</button>
+      </div>
     </div>
-
-    <div class="divider"></div>
-
-    <!-- WHO -->
-    <div class="field guest-field" id="guestField">
-      <span>Who</span>
-      <input
-        type="text"
-        id="guestInput"
-        name="guests"
-        value="<%= currentGuests %>"
-        placeholder="Add guests"
-        readonly
-      />
+    <div class="guest-row">
+      <div>
+        <h4>Children</h4>
+        <p>Ages 2-12</p>
+      </div>
+      <div class="counter">
+        <button type="button" onclick="changeGuest('child', -1)" aria-label="Remove child">-</button>
+        <span id="childCount">0</span>
+        <button type="button" onclick="changeGuest('child', 1)" aria-label="Add child">+</button>
+      </div>
     </div>
-
-    <!-- SEARCH BUTTON -->
-    <button type="submit" class="search-btn">
-      🔍
-    </button>
-
   </div>
 
-</form>
-
-   
-    <!-- GUEST DROPDOWN -->
-      <div class="guest-box" id="guestBox"> <div class="row"> <div>
-       <h4>Adults</h4> 
-       <p>Ages 13+</p>
-       </div>
-        <div class="counter">
-           <button onclick="changeGuest('adult', -1)">−</button>
-            <span id="adultCount">1</span>
-             <button onclick="changeGuest('adult', 1)">+</button> 
-            </div>
-           </div>
-            <div class="guest-row"> <div>
-               <h4>Children</h4> <p>Ages 2–12</p>
-               </div> 
-               <div class="counter">
-                 <button onclick="changeGuest('child', -1)">−</button>
-                  <span id="childCount">0</span>
-                   <button onclick="changeGuest('child', 1)">+</button>
-                   </div>
-                   </div>
-                   </div>
-                   </div>
-
-  <!-- RIGHT MENU -->
   <div class="nav-right">
-    <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
+    <button
+      class="hamburger-btn"
+      type="button"
+      onclick="toggleMenu()"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="hamburgerDropdown"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
 
     <div id="hamburgerDropdown" class="hamburger-dropdown">
       <% if (currentUser) { %>
         <div class="menu-user">
-          👤 <%= currentUser.username %>
+          <i class="fa-regular fa-circle-user"></i>
+          <span><%= currentUser.username %></span>
         </div>
 
-        <a href="/listings/new">➕ Add New Listing</a>
-        <a href="/listings/mine">My listings</a>
-        <a href="/bookings">My bookings</a>
-        <a href="/listings/wishlist">My wishlist</a>
+        <a href="/listings/new">
+          <i class="fa-solid fa-plus"></i>
+          <span>Add New Listing</span>
+        </a>
+        <a href="/listings/mine">
+          <i class="fa-regular fa-rectangle-list"></i>
+          <span>My listings</span>
+        </a>
+        <a href="/bookings">
+          <i class="fa-regular fa-calendar-check"></i>
+          <span>My bookings</span>
+        </a>
+        <a href="/listings/wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span>My wishlist</span>
+        </a>
         <hr>
-        <a href="/logout" class="logout">🚪 Logout</a>
+        <a href="/logout" class="logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
       <% } else { %>
-        <a href="/login">👤 Login</a>
-        <a href="/register">📝 Register</a>
+        <a href="/login">
+          <i class="fa-regular fa-circle-user"></i>
+          <span>Login</span>
+        </a>
+        <a href="/register">
+          <i class="fa-regular fa-pen-to-square"></i>
+          <span>Register</span>
+        </a>
       <% } %>
     </div>
   </div>
 </header>
-
-

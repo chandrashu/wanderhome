@@ -72,15 +72,6 @@ const sampleListings = [
     category: "Spiritual",
   },
   {
-    title: "Desert Luxury Camp",
-    description: "Premium tent stay in Thar Desert.",
-    image: "https://unsplash.com/photos/a-group-of-blue-tents-sitting-in-the-middle-of-a-desert-vEWXUHvHNWg",
-    price: 4800,
-    location: "Jaisalmer",
-    country: "India",
-    category: "Camping",
-  },
-  {
     title: "Skyline City Flat",
     description: "High-rise apartment with city view.",
     image: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
@@ -88,16 +79,6 @@ const sampleListings = [
     location: "Mumbai",
     country: "India",
     category: "Rooms",
-  },
-
-  {
-    title: "Snow View Cabin",
-    description: "Wooden cabin with snow mountains.",
-    image: "https://unsplash.com/photos/snowy-village-nestled-among-snow-covered-mountains-and-pine-trees-LxrL92AstjM",
-    price: 3800,
-    location: "Gulmarg",
-    country: "India",
-    category: "Mountains",
   },
   {
     title: "Forest Treehouse",
@@ -109,15 +90,6 @@ const sampleListings = [
     category: "Nature",
   },
   {
-    title: "Colonial Bungalow",
-    description: "Old British-era bungalow.",
-    image: "http://unsplash.com/photos/a-house-with-a-fence-around-it-H_8qQ69v3AA",
-    price: 3100,
-    location: "Shimla",
-    country: "India",
-    category: "Mountains",
-  },
-  {
     title: "Backwater Villa",
     description: "Traditional Kerala backwater house.",
     image: "https://images.pexels.com/photos/534151/pexels-photo-534151.jpeg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
@@ -127,15 +99,6 @@ const sampleListings = [
     category: "Nature",
   },
   {
-    title: "Royal Palace Stay",
-    description: "Live like royalty in palace home.",
-    image: "https://unsplash.com/photos/a-living-room-filled-with-furniture-and-a-large-window-LLFwrcOVJNM",
-    price: 6500,
-    location: "Jodhpur",
-    country: "India",
-    category: "Heritage",
-  },
-  {
     title: "City View Penthouse",
     description: "Luxury penthouse with skyline view.",
     image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
@@ -143,15 +106,6 @@ const sampleListings = [
     location: "Hyderabad",
     country: "India",
     category: "City",
-  },
-  {
-    title: "Farm Stay Retreat",
-    description: "Experience peaceful village life.",
-    image: "https://unsplash.com/photos/stone-buildings-line-a-cobblestone-path-with-a-bench-ObYA6PhABU8",
-    price: 2000,
-    location: "Nashik",
-    country: "India",
-    category: "Nature",
   },
   {
     title: "Hill Resort Stay",
@@ -191,15 +145,6 @@ const sampleListings = [
     category: "Mountains",
   },
   {
-    title: "City Center Flat",
-    description: "Close to restaurants and shopping.",
-    image: "http://unsplash.com/photos/a-building-with-many-balconies-on-the-top-of-it-AZrkXZO9VDM",
-    price: 2600,
-    location: "Chennai",
-    country: "India",
-    category: "City",
-  },
-  {
     title: "Temple View Stay",
     description: "Peaceful stay near ghats.",
     image: "https://images.pexels.com/photos/356366/pexels-photo-356366.jpeg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
@@ -207,15 +152,6 @@ const sampleListings = [
     location: "Varanasi",
     country: "India",
     category: "Spiritual",
-  },
-  {
-    title: "Luxury Desert Villa",
-    description: "Modern villa in desert city.",
-    image: "https://unsplash.com/photos/a-desert-house-with-a-lantern-in-front-of-it-mHmSRqe0yek",
-    price: 5200,
-    location: "Bikaner",
-    country: "India",
-    category: "Heritage",
   },
   {
     title: "Green Valley Homestay",
@@ -243,15 +179,6 @@ const sampleListings = [
     location: "Noida",
     country: "India",
     category: "City",
-  },
-  {
-    title: "Countryside Retreat",
-    description: "Silent countryside escape.",
-    image: "https://unsplash.com/photos/river-flows-through-a-town-with-green-hills-IqScPCT7fo8",
-    price: 2100,
-    location: "Amritsar",
-    country: "India",
-    category: "Nature",
   },
   {
     title: "Premium Hill Villa",

@@ -1,8 +1,18 @@
 /* Responsive */
 @media (max-width: 992px) {
-  .navbar {
-    grid-template-columns: 1fr auto;
-    padding: 12px 20px;
+  .navbar.app-navbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px 16px;
+    min-height: 0;
+    padding: 10px 20px 12px;
+  }
+
+  .nav-left {
+    min-width: 0;
+  }
+
+  .brand-logo {
+    width: 188px;
   }
 
   #searchForm {
@@ -14,8 +24,15 @@
   .search-container {
     max-width: none;
     width: 100%;
-    margin-left: 0;
-    overflow-x: auto;
+    margin: 0;
+  }
+
+  .guest-box {
+    top: calc(100% + 8px);
+  }
+
+  .category-bar {
+    top: 150px;
   }
 
   .image-grid {
@@ -63,57 +80,276 @@
     padding-right: 16px !important;
   }
 
-  .navbar {
-    gap: 12px;
-    padding: 12px 16px;
+  .navbar.app-navbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 10px 12px;
+    min-height: 62px;
+    padding: 10px 14px 12px;
   }
 
-  .nav-left {
-    padding-left: 0;
-    font-size: 22px;
+  .brand-logo {
+    width: 174px;
+  }
+
+  #searchForm {
+    grid-column: auto;
+    justify-self: end;
+    order: initial;
+    width: auto;
+  }
+
+  .nav-search-form {
+    width: auto;
   }
 
   .search-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
-    gap: 8px;
-    overflow: visible;
-    border-radius: var(--radius-md);
+    width: auto;
+    max-width: none;
+    display: block;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
     box-shadow: none;
   }
 
-  .field {
-    min-width: 0;
-    padding: 8px 10px;
+  .search-container .field,
+  .search-container .divider {
+    display: none;
   }
 
-  .field:first-child {
-    grid-column: 1 / -1;
+  .search-btn {
+    width: 44px;
+    height: 40px;
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(255, 56, 92, 0.22);
   }
 
-  .field input {
-    width: 100%;
-    min-width: 0;
+  .nav-search-form.mobile-search-open {
+    position: fixed;
+    top: 74px;
+    left: 14px;
+    z-index: 1007;
+    right: auto;
+    width: calc(100vw - 28px) !important;
+    display: block;
+    justify-self: auto;
+  }
+
+  .nav-search-form.mobile-search-open .search-container {
+    width: 100% !important;
+    max-width: none;
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px;
+    gap: 8px;
+    padding: 7px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+  }
+
+  .nav-search-form.mobile-search-open .search-container .field:first-child {
+    min-height: 40px;
+    display: block;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: var(--bg-soft);
+  }
+
+  .nav-search-form.mobile-search-open .search-container .field:not(:first-child),
+  .nav-search-form.mobile-search-open .search-container .divider {
+    display: none;
+  }
+
+  .nav-search-form.mobile-search-open .field label {
+    font-size: 10px;
+  }
+
+  .nav-search-form.mobile-search-open .field input {
+    font-size: 13px;
+  }
+
+  .nav-search-form.mobile-search-open .search-btn {
+    width: 40px;
+    height: 40px;
+    box-shadow: none;
   }
 
   .guest-box {
-    position: fixed;
-    top: 148px;
-    left: 16px;
-    right: 16px;
-    width: auto;
-    transform: none;
-    animation: none;
+    display: none !important;
+  }
+
+  .hamburger-dropdown {
+    right: 0;
+    width: min(300px, calc(100vw - 28px));
   }
 
   .category-bar {
-    top: 148px;
-    gap: 22px;
-    padding: 10px 16px;
+    display: none;
   }
 
-  .divider {
-    display: none;
+  .mobile-bottom-actions {
+    position: fixed;
+    right: 16px;
+    bottom: 14px;
+    left: 16px;
+    z-index: 1004;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px;
+    border: 1px solid rgba(221, 221, 221, 0.9);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(14px);
+  }
+
+  .mobile-action-btn {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 0;
+    border-radius: 16px;
+    background: var(--bg-soft);
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .mobile-action-btn i {
+    color: var(--primary);
+    font-size: 16px;
+  }
+
+  .mobile-action-btn[aria-expanded="true"] {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .mobile-action-btn[aria-expanded="true"] i {
+    color: #fff;
+  }
+
+  .mobile-control-panel {
+    position: fixed;
+    right: 12px;
+    bottom: 88px;
+    left: 12px;
+    z-index: 1005;
+    display: block;
+    max-height: min(62vh, 460px);
+    padding: 10px 14px 16px;
+    overflow-y: auto;
+    border: 1px solid var(--border-soft);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 20px 46px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(16px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .mobile-control-panel.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobile-panel-handle {
+    width: 42px;
+    height: 4px;
+    margin: 0 auto 10px;
+    border-radius: 999px;
+    background: #d8d8d8;
+  }
+
+  .mobile-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .mobile-panel-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .mobile-panel-close {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--text-dark);
+  }
+
+  .mobile-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .mobile-filter-chip,
+  .mobile-sort-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    background: #fff;
+    color: var(--text-dark);
+    text-decoration: none;
+  }
+
+  .mobile-filter-chip i,
+  .mobile-sort-option i:first-child {
+    width: 18px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .mobile-filter-chip.active,
+  .mobile-sort-option.active {
+    border-color: rgba(255, 56, 92, 0.35);
+    background: rgba(255, 56, 92, 0.08);
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .mobile-filter-chip.active i,
+  .mobile-sort-option.active i {
+    color: var(--primary);
+  }
+
+  .mobile-sort-list {
+    display: grid;
+    gap: 9px;
+  }
+
+  .mobile-sort-option {
+    justify-content: flex-start;
+  }
+
+  .mobile-sort-option .fa-check {
+    margin-left: auto;
+  }
+
+  .listing-index-page {
+    padding-bottom: 98px;
   }
 
   .listing-title {
@@ -156,27 +392,52 @@
   }
 }
 
-@media (max-width: 500px) {
-  .search-container {
-    grid-template-columns: 1fr;
-    border-radius: var(--radius-md);
+@media (max-width: 520px) {
+  .brand-logo {
+    width: 42px;
   }
 
-  .field:first-child {
-    grid-column: auto;
+  .nav-left {
+    flex: 0 0 42px;
+  }
+
+  .hamburger-btn {
+    width: 44px;
+    height: 40px;
+  }
+
+  .search-container {
+    display: block;
+    padding: 0;
+  }
+
+  .field {
+    display: none;
+  }
+
+  .field label {
+    font-size: 10px;
+  }
+
+  .field input {
+    font-size: 12px;
   }
 
   .search-btn {
-    width: 100%;
-    border-radius: var(--radius-sm);
+    width: 44px;
+    height: 40px;
   }
 
-  .guest-box {
-    top: 228px;
+  .mobile-bottom-actions {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
   }
 
-  .category-bar {
-    top: 228px;
+  .mobile-control-panel {
+    right: 10px;
+    bottom: 84px;
+    left: 10px;
   }
 
   .small-images {
@@ -193,5 +454,1983 @@
 
   .footer .brand p {
     margin: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  body {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .container {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .navbar.app-navbar {
+    min-height: 52px;
+    padding: 7px 8px 8px;
+  }
+
+  .brand-logo,
+  .nav-left {
+    width: 36px;
+    flex-basis: 36px;
+  }
+
+  .hamburger-btn,
+  .search-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-search-form.mobile-search-open {
+    top: 54px;
+    left: 8px;
+    right: auto;
+    width: calc(100vw - 16px) !important;
+  }
+
+  .nav-search-form.mobile-search-open .search-container {
+    grid-template-columns: minmax(0, 1fr) 36px;
+    gap: 6px;
+    padding: 5px;
+    border-radius: 14px;
+  }
+
+  .nav-search-form.mobile-search-open .search-container .field:first-child {
+    min-height: 36px;
+    padding: 4px 8px;
+    border-radius: 10px;
+  }
+
+  .nav-search-form.mobile-search-open .field input {
+    font-size: 12px;
+  }
+
+  .nav-search-form.mobile-search-open .search-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hamburger-dropdown {
+    width: min(210px, calc(100vw - 16px));
+    border-radius: 10px;
+  }
+
+  .hamburger-dropdown a,
+  .menu-user {
+    gap: 7px;
+    padding: 8px 10px;
+    font-size: 11.5px;
+  }
+
+  .hamburger-dropdown a i,
+  .menu-user i {
+    width: 15px;
+    font-size: 11.5px;
+  }
+
+  .listing-index-page {
+    margin-top: 0.5rem !important;
+    padding-bottom: 76px;
+  }
+
+  .listing-index-page .row {
+    --bs-gutter-x: 8px;
+    --bs-gutter-y: 12px;
+  }
+
+  .listing-index-page .row > .col {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+
+  .listing-card {
+    border-radius: 8px !important;
+  }
+
+  .img-wrapper {
+    height: 104px;
+    aspect-ratio: auto;
+    border-radius: 8px;
+  }
+
+  .listing-img {
+    border-radius: 8px !important;
+  }
+
+  .wishlist-form {
+    top: 6px;
+    right: 6px;
+  }
+
+  .wishlist-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .listing-card-body {
+    padding-top: 5px !important;
+    padding-bottom: 0 !important;
+  }
+
+  .listing-card-top {
+    gap: 4px;
+  }
+
+  .listing-card-title {
+    min-height: 26px;
+    font-size: 10.5px;
+    line-height: 1.22;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .listing-card-rating {
+    gap: 2px;
+    font-size: 10.5px;
+  }
+
+  .listing-card-rating i {
+    font-size: 9px;
+  }
+
+  .listing-card-location,
+  .listing-card-meta,
+  .listing-card-price {
+    margin-top: 2px;
+    font-size: 9.7px;
+    line-height: 1.22;
+  }
+
+  .listing-card-price {
+    margin-top: 4px;
+  }
+
+  .empty-listings,
+  .empty-bookings,
+  .empty-host-listings {
+    min-height: 42vh !important;
+    padding: 32px 12px !important;
+  }
+
+  .empty-listings h2,
+  .empty-bookings h2,
+  .empty-host-listings h2 {
+    font-size: 1.2rem !important;
+  }
+
+  .listing-show-page {
+    margin-top: 8px;
+  }
+
+  .listing-title {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    font-size: 1.14rem !important;
+    line-height: 1.2;
+  }
+
+  .listing-show-page > .text-muted {
+    margin-bottom: 12px !important;
+    font-size: 12px;
+  }
+
+  .image-grid {
+    gap: 0;
+    height: auto !important;
+    border-radius: 10px;
+  }
+
+  .main-image {
+    height: 190px !important;
+  }
+
+  .about-section {
+    margin-top: 16px;
+    padding-bottom: 18px;
+  }
+
+  .about-top {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .listing-location {
+    gap: 6px;
+    font-size: 12.5px;
+  }
+
+  .price-box {
+    min-width: 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+
+  .price-box h2 {
+    font-size: 0.98rem;
+  }
+
+  .price-box span {
+    font-size: 11px;
+  }
+
+  .listing-highlights {
+    gap: 6px;
+    margin: 14px 0;
+  }
+
+  .highlight-item {
+    gap: 8px;
+    padding: 9px 10px;
+    border-radius: 8px;
+  }
+
+  .highlight-item span {
+    font-size: 1.12rem;
+  }
+
+  .highlight-item h6 {
+    font-size: 12px;
+  }
+
+  .highlight-item p,
+  .amenity-card p {
+    font-size: 10.8px;
+    line-height: 1.35;
+  }
+
+  .about-description {
+    padding-top: 16px;
+  }
+
+  .about-description h4,
+  .map-section h4 {
+    font-size: 1.05rem;
+  }
+
+  .about-description p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .listing-content-row {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .amenities-section .d-flex {
+    gap: 0.75rem;
+  }
+
+  .amenities-section h3,
+  .reviews-wrapper h3,
+  .all-reviews h3,
+  .review-form-box h3 {
+    font-size: 0.98rem;
+  }
+
+  .amenities-section p {
+    font-size: 11px;
+  }
+
+  .amenities-section .btn {
+    padding: 6px 10px !important;
+    font-size: 11px;
+  }
+
+  .amenities-grid {
+    gap: 8px;
+  }
+
+  .amenity-card {
+    gap: 8px;
+    padding: 9px;
+    border-radius: 8px;
+  }
+
+  .amenity-icon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    font-size: 0.95rem;
+  }
+
+  .amenity-card h6 {
+    font-size: 12px;
+  }
+
+  #map {
+    height: 190px;
+    margin-bottom: 1.25rem;
+    border-radius: 8px;
+  }
+
+  .booking-card,
+  .review-form-box {
+    padding: 12px !important;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .booking-card {
+    margin-top: 1.25rem;
+  }
+
+  .booking-card h3 {
+    margin-bottom: 12px;
+    font-size: 0.98rem;
+  }
+
+  .booking-card .form-control,
+  .booking-card .form-select {
+    min-height: 38px;
+    padding: 8px 9px;
+    font-size: 12px;
+  }
+
+  .form-label {
+    font-size: 11.5px;
+  }
+
+  .reserve-btn,
+  .review-submit-btn,
+  .auth-btn {
+    min-height: 38px;
+    font-size: 12px;
+  }
+
+  .booking-card .d-flex {
+    font-size: 11.5px;
+  }
+
+  .reviews-wrapper {
+    margin-top: 30px;
+  }
+
+  .review-summary {
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .rating-circle {
+    width: 104px;
+    height: 104px;
+  }
+
+  .circle-content {
+    width: 92px;
+    height: 92px;
+  }
+
+  .circle-content h2 {
+    font-size: 1.35rem;
+  }
+
+  .circle-stars {
+    font-size: 0.75rem;
+  }
+
+  .circle-content p,
+  .review-subtitle {
+    font-size: 12px;
+  }
+
+  .review-card .card-body {
+    padding: 12px;
+  }
+
+  .review-rating-badge {
+    padding: 5px 9px;
+    font-size: 12px;
+  }
+
+  .review-comment,
+  .review-text {
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  .rating-breakdown div,
+  .review-score-row span {
+    padding: 8px 9px;
+    font-size: 12px;
+  }
+
+  .review-tags span,
+  .review-tags-show span,
+  .helpful-tags-summary span {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .star-rating label {
+    font-size: 1.55rem;
+  }
+
+  .review-textarea {
+    min-height: 96px;
+    padding: 11px !important;
+  }
+
+  .review-image-grid {
+    gap: 6px;
+  }
+
+  .review-actions {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .review-actions .btn {
+    padding: 5px 11px !important;
+    font-size: 12px;
+  }
+
+  .mobile-bottom-actions {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 16px;
+  }
+
+  .mobile-action-btn {
+    min-height: 34px;
+    gap: 5px;
+    border-radius: 10px;
+    font-size: 10.8px;
+  }
+
+  .mobile-action-btn i {
+    font-size: 12px;
+  }
+
+  .mobile-control-panel {
+    right: 8px;
+    bottom: 64px;
+    left: 8px;
+    max-height: min(56vh, 360px);
+    padding: 7px 8px 10px;
+    border-radius: 16px;
+  }
+
+  .mobile-panel-header h3 {
+    font-size: 14px;
+  }
+
+  .mobile-panel-close {
+    width: 28px;
+    height: 28px;
+  }
+
+  .mobile-filter-grid,
+  .mobile-sort-list {
+    gap: 7px;
+  }
+
+  .mobile-filter-chip,
+  .mobile-sort-option {
+    min-height: 32px;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 9px;
+    font-size: 10.8px;
+  }
+
+  .auth-page,
+  .listing-form-page {
+    padding: 12px 10px;
+  }
+
+  .auth-shell,
+  .listing-form-shell {
+    border-radius: 12px;
+  }
+
+  .auth-panel,
+  .listing-form-panel {
+    padding: 14px;
+  }
+
+  .auth-logo {
+    font-size: 20px;
+  }
+
+  .auth-heading h1,
+  .listing-form-heading h1 {
+    font-size: 1.18rem;
+  }
+
+  .auth-heading p,
+  .listing-form-heading p,
+  .auth-footer-text {
+    font-size: 12px;
+  }
+
+  .auth-input,
+  .auth-social-btn,
+  .listing-edit-form .form-control {
+    min-height: 36px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .listing-preview-panel {
+    min-height: 168px;
+  }
+
+  .preview-card {
+    padding: 10px;
+  }
+
+  .preview-card h2,
+  .preview-price {
+    font-size: 0.9rem;
+  }
+
+  .flash-message {
+    width: calc(100% - 20px);
+    margin: 0.7rem auto;
+    padding: 0.75rem 0.85rem;
+    border-radius: 10px;
+    font-size: 12.5px;
+  }
+
+  .footer {
+    margin-top: 36px;
+  }
+
+  .footer-container {
+    padding: 24px 14px 16px;
+  }
+
+  .footer-logo {
+    font-size: 22px;
+  }
+
+  .footer-brand p,
+  .footer-col a,
+  .footer-bottom,
+  .footer-newsletter-form input,
+  .footer-newsletter-form button {
+    font-size: 12.5px;
+  }
+
+  .footer-newsletter-form input,
+  .footer-newsletter-form button {
+    height: 40px;
+  }
+
+  .bookings-page,
+  .host-listings-page {
+    padding-top: 20px !important;
+    padding-bottom: 36px !important;
+  }
+
+  .wishlist-header,
+  .bookings-header,
+  .host-listings-header {
+    gap: 12px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .wishlist-header h1,
+  .bookings-header h1,
+  .host-listings-header h1 {
+    font-size: 1.35rem !important;
+  }
+
+  .wishlist-header p,
+  .bookings-header p,
+  .host-listings-header p {
+    font-size: 12.5px !important;
+  }
+
+  .booking-card-item,
+  .host-listing-card {
+    border-radius: 10px !important;
+  }
+
+  .booking-image-link,
+  .host-listing-image-link {
+    min-height: 132px !important;
+  }
+
+  .booking-content,
+  .host-listing-content {
+    padding: 12px !important;
+  }
+
+  .booking-title-row,
+  .host-listing-title-row {
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .booking-title-row h2,
+  .host-listing-title-row h2 {
+    font-size: 0.94rem !important;
+  }
+
+  .booking-title-row p,
+  .host-listing-title-row p {
+    font-size: 11px !important;
+  }
+
+  .booking-status,
+  .host-listing-category {
+    padding: 4px 8px !important;
+    font-size: 10.5px !important;
+  }
+
+  .booking-meta-grid,
+  .host-listing-stats {
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .booking-meta-grid div,
+  .host-listing-stats div {
+    padding: 8px !important;
+    border-radius: 8px !important;
+  }
+
+  .booking-meta-grid span,
+  .booking-price-row span,
+  .host-listing-stats span {
+    font-size: 10.5px !important;
+  }
+
+  .booking-meta-grid strong,
+  .host-listing-stats strong {
+    font-size: 11px !important;
+  }
+
+  .booking-price-row {
+    padding-top: 11px !important;
+  }
+
+  .booking-price-row strong {
+    font-size: 1rem !important;
+  }
+
+  .explore-more-btn,
+  .cancel-booking-btn,
+  .host-add-btn,
+  .host-view-btn,
+  .host-edit-btn {
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .img-wrapper {
+    height: 96px;
+  }
+
+  .listing-index-page .row {
+    --bs-gutter-x: 8px;
+    --bs-gutter-y: 12px;
+  }
+
+  .listing-card-title {
+    font-size: 10.2px;
+  }
+
+  .listing-card-location,
+  .listing-card-meta,
+  .listing-card-price {
+    font-size: 9.4px;
+  }
+
+  .main-image {
+    height: 180px !important;
+  }
+
+  .booking-image-link,
+  .host-listing-image-link {
+    min-height: 122px !important;
+  }
+}
+
+/* Final phone polish: consistent real mobile sizing across the project */
+@media (max-width: 576px) {
+  :root {
+    --radius-sm: 7px;
+    --radius-md: 9px;
+  }
+
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-size: 13px;
+    line-height: 1.42;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    overflow-wrap: anywhere;
+  }
+
+  .container,
+  .listing-index-page,
+  .listing-show-page,
+  .bookings-page,
+  .host-listings-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .btn,
+  button,
+  .form-control,
+  .form-select {
+    font-size: 12px;
+  }
+
+  .navbar.app-navbar {
+    min-height: 54px;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    gap: 8px;
+    padding: 7px 10px;
+  }
+
+  .brand-logo,
+  .nav-left {
+    width: 36px;
+    min-width: 36px;
+    flex-basis: 36px;
+  }
+
+  .hamburger-btn,
+  .search-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    font-size: 15px;
+  }
+
+  .hamburger-dropdown {
+    width: min(220px, calc(100vw - 20px));
+    border-radius: 10px;
+  }
+
+  .hamburger-dropdown a,
+  .menu-user {
+    min-height: 36px;
+    gap: 8px;
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .hamburger-dropdown a i,
+  .menu-user i {
+    width: 16px;
+    font-size: 12px;
+  }
+
+  .nav-search-form.mobile-search-open {
+    top: 58px;
+    left: 10px;
+    width: calc(100vw - 20px) !important;
+  }
+
+  .nav-search-form.mobile-search-open .search-container {
+    grid-template-columns: minmax(0, 1fr) 38px;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 15px;
+  }
+
+  .nav-search-form.mobile-search-open .search-container .field:first-child {
+    min-height: 38px;
+    padding: 5px 9px;
+    border-radius: 10px;
+  }
+
+  .nav-search-form.mobile-search-open .field label {
+    font-size: 10px;
+  }
+
+  .nav-search-form.mobile-search-open .field input {
+    font-size: 12px;
+  }
+
+  .listing-index-page {
+    margin-top: 10px !important;
+    padding-bottom: 74px;
+  }
+
+  .listing-index-page .row {
+    --bs-gutter-x: 10px;
+    --bs-gutter-y: 14px;
+  }
+
+  .listing-index-page .row > .col {
+    width: 50%;
+    flex: 0 0 auto;
+  }
+
+  .listing-card {
+    border-radius: 8px !important;
+  }
+
+  .img-wrapper {
+    height: 108px;
+    border-radius: 8px;
+  }
+
+  .listing-img {
+    border-radius: 8px !important;
+  }
+
+  .wishlist-form {
+    top: 6px;
+    right: 6px;
+  }
+
+  .wishlist-btn {
+    width: 27px;
+    height: 27px;
+    font-size: 12px;
+  }
+
+  .listing-card-body {
+    padding-top: 6px !important;
+  }
+
+  .listing-card-top {
+    gap: 5px;
+  }
+
+  .listing-card-title {
+    min-height: 27px;
+    font-size: 11px;
+    line-height: 1.23;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .listing-card-rating {
+    gap: 2px;
+    font-size: 10.5px;
+    line-height: 1.2;
+  }
+
+  .listing-card-rating i {
+    font-size: 9px;
+  }
+
+  .listing-card-location,
+  .listing-card-meta,
+  .listing-card-price {
+    margin-top: 2px;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  .listing-card-price {
+    margin-top: 4px;
+  }
+
+  .listing-show-page {
+    margin-top: 8px;
+  }
+
+  .listing-title {
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    font-size: 1.2rem !important;
+    line-height: 1.18;
+  }
+
+  .listing-show-page > .text-muted {
+    margin-bottom: 12px !important;
+    font-size: 11.5px;
+  }
+
+  .image-grid {
+    height: auto !important;
+    border-radius: 9px;
+  }
+
+  .main-image {
+    height: 205px !important;
+  }
+
+  .small-images {
+    display: none;
+  }
+
+  .about-section {
+    margin-top: 14px;
+    padding-bottom: 18px;
+  }
+
+  .about-top {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .listing-location {
+    gap: 5px;
+    font-size: 11.5px;
+  }
+
+  .price-box {
+    padding: 9px 11px;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  .price-box h2 {
+    font-size: 1rem;
+  }
+
+  .price-box span {
+    font-size: 11px;
+  }
+
+  .listing-highlights,
+  .amenities-grid {
+    gap: 7px;
+  }
+
+  .listing-highlights {
+    margin: 14px 0;
+  }
+
+  .highlight-item,
+  .amenity-card {
+    gap: 9px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .highlight-item span {
+    font-size: 1.15rem;
+  }
+
+  .highlight-item h6,
+  .amenity-card h6 {
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+
+  .highlight-item p,
+  .amenity-card p {
+    font-size: 10.8px;
+    line-height: 1.35;
+  }
+
+  .about-description {
+    padding-top: 15px;
+  }
+
+  .about-description h4,
+  .map-section h4,
+  .amenities-section h3,
+  .reviews-wrapper h3,
+  .all-reviews h3,
+  .review-form-box h3 {
+    font-size: 1rem;
+  }
+
+  .about-description p,
+  .review-comment,
+  .review-text {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .amenities-section p,
+  .review-subtitle {
+    font-size: 11.5px;
+  }
+
+  .amenity-icon {
+    width: 31px;
+    height: 31px;
+    min-width: 31px;
+    font-size: 0.95rem;
+  }
+
+  #map {
+    height: 200px;
+    border-radius: 9px;
+  }
+
+  .listing-content-row {
+    margin-top: 18px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .booking-card,
+  .review-form-box,
+  .review-card {
+    border-radius: 9px !important;
+    box-shadow: none;
+  }
+
+  .booking-card,
+  .review-form-box {
+    padding: 12px !important;
+  }
+
+  .booking-card h3 {
+    margin-bottom: 12px;
+    font-size: 1rem;
+  }
+
+  .booking-card .form-control,
+  .booking-card .form-select,
+  .listing-edit-form .form-control,
+  .listing-edit-form .form-select,
+  .auth-input {
+    min-height: 39px;
+    height: auto;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+
+  .form-label,
+  .listing-edit-form .form-label {
+    margin-bottom: 4px;
+    font-size: 11.5px;
+  }
+
+  .reserve-btn,
+  .review-submit-btn,
+  .auth-btn,
+  .save-listing-btn,
+  .cancel-btn {
+    min-height: 39px;
+    border-radius: 8px !important;
+    font-size: 12px;
+  }
+
+  .booking-card .d-flex {
+    font-size: 11.5px;
+  }
+
+  .reviews-wrapper {
+    margin-top: 28px;
+  }
+
+  .review-summary {
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .rating-circle {
+    width: 96px;
+    height: 96px;
+  }
+
+  .circle-content {
+    width: 84px;
+    height: 84px;
+  }
+
+  .circle-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .circle-stars {
+    font-size: 0.72rem;
+  }
+
+  .circle-content p {
+    font-size: 10.5px;
+  }
+
+  .review-card .card-body {
+    padding: 11px;
+  }
+
+  .review-rating-badge {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .rating-breakdown div,
+  .review-score-row span {
+    padding: 7px 8px;
+    border-radius: 7px;
+    font-size: 11px;
+  }
+
+  .review-tags {
+    gap: 7px;
+  }
+
+  .review-tags span,
+  .review-tags-show span,
+  .helpful-tags-summary span {
+    min-height: 30px;
+    padding: 5px 9px;
+    font-size: 11px;
+  }
+
+  .star-rating label {
+    font-size: 1.45rem;
+  }
+
+  .review-textarea,
+  .listing-edit-form textarea.form-control {
+    min-height: 92px;
+  }
+
+  .mobile-bottom-actions {
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    gap: 6px;
+    padding: 6px;
+    border-radius: 16px;
+  }
+
+  .mobile-action-btn {
+    min-height: 38px;
+    gap: 6px;
+    border-radius: 10px;
+    font-size: 11.5px;
+  }
+
+  .mobile-action-btn i {
+    font-size: 12px;
+  }
+
+  .mobile-control-panel {
+    right: 10px;
+    bottom: 68px;
+    left: 10px;
+    max-height: min(58vh, 380px);
+    padding: 8px 10px 11px;
+    border-radius: 15px;
+  }
+
+  .mobile-panel-header {
+    margin-bottom: 9px;
+  }
+
+  .mobile-panel-header h3 {
+    font-size: 14px;
+  }
+
+  .mobile-panel-close {
+    width: 29px;
+    height: 29px;
+  }
+
+  .mobile-filter-grid,
+  .mobile-sort-list {
+    gap: 7px;
+  }
+
+  .mobile-filter-chip,
+  .mobile-sort-option {
+    min-height: 34px;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 9px;
+    font-size: 11px;
+  }
+
+  .auth-page,
+  .listing-form-page {
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .auth-shell,
+  .listing-form-shell {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .auth-panel,
+  .listing-form-panel {
+    padding: 13px;
+  }
+
+  .auth-heading,
+  .listing-form-heading {
+    margin-bottom: 10px;
+  }
+
+  .auth-eyebrow,
+  .form-eyebrow,
+  .preview-eyebrow,
+  .bookings-eyebrow,
+  .host-listings-eyebrow,
+  .wishlist-eyebrow {
+    margin-bottom: 4px;
+    font-size: 6px;
+  }
+
+  .auth-heading h1,
+  .listing-form-heading h1,
+  .wishlist-header h1,
+  .bookings-header h1,
+  .host-listings-header h1 {
+    margin-bottom: 5px;
+    font-size: 1.18rem !important;
+    line-height: 1.16;
+  }
+
+  .auth-heading p,
+  .listing-form-heading p,
+  .auth-footer-text,
+  .wishlist-header p,
+  .bookings-header p,
+  .host-listings-header p {
+    font-size: 11.5px !important;
+    line-height: 1.35;
+  }
+
+  .auth-form .mb-3,
+  .listing-edit-form .mb-3 {
+    margin-bottom: 9px !important;
+  }
+
+  .auth-btn {
+    height: auto;
+    min-height: 39px;
+  }
+
+  .password-toggle {
+    width: 28px;
+    height: 28px;
+  }
+
+  .auth-divider {
+    margin: 12px 0 10px;
+  }
+
+  .auth-social-grid {
+    gap: 7px;
+  }
+
+  .auth-social-btn {
+    min-height: 37px;
+    height: 37px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+
+  .listing-preview-panel {
+    min-height: 145px;
+  }
+
+  .preview-card {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 9px;
+    border-radius: 9px;
+  }
+
+  .preview-card h2,
+  .preview-price {
+    font-size: 0.88rem;
+  }
+
+  .preview-card p,
+  .preview-price span:last-child,
+  .form-text {
+    font-size: 10.8px;
+  }
+
+  .form-section {
+    padding: 9px 0;
+  }
+
+  .form-section h2 {
+    margin-bottom: 7px;
+    font-size: 0.86rem;
+  }
+
+  .form-actions {
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  .bookings-page,
+  .host-listings-page {
+    padding-top: 18px !important;
+    padding-bottom: 34px !important;
+  }
+
+  .wishlist-header,
+  .bookings-header,
+  .host-listings-header {
+    gap: 10px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .bookings-grid,
+  .host-listings-grid {
+    gap: 12px;
+  }
+
+  .booking-card-item,
+  .host-listing-card {
+    grid-template-columns: 1fr !important;
+    border-radius: 9px !important;
+    box-shadow: none;
+  }
+
+  .booking-image-link,
+  .host-listing-image-link {
+    min-height: 128px !important;
+    height: 128px;
+  }
+
+  .booking-content,
+  .host-listing-content {
+    padding: 11px !important;
+  }
+
+  .booking-title-row,
+  .host-listing-title-row {
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .booking-title-row h2,
+  .host-listing-title-row h2 {
+    margin-bottom: 3px;
+    font-size: 0.95rem !important;
+  }
+
+  .booking-title-row p,
+  .host-listing-title-row p {
+    font-size: 11px !important;
+  }
+
+  .booking-status,
+  .host-listing-category {
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+  }
+
+  .booking-meta-grid,
+  .host-listing-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .booking-meta-grid div,
+  .host-listing-stats div {
+    padding: 8px !important;
+    border-radius: 7px !important;
+  }
+
+  .booking-meta-grid span,
+  .booking-price-row span,
+  .host-listing-stats span {
+    font-size: 10px !important;
+  }
+
+  .booking-meta-grid strong,
+  .host-listing-stats strong {
+    font-size: 11px !important;
+  }
+
+  .booking-price-row {
+    align-items: center !important;
+    flex-direction: row !important;
+    padding-top: 9px !important;
+  }
+
+  .booking-price-row strong {
+    font-size: 0.95rem !important;
+  }
+
+  .host-listing-actions {
+    flex-direction: row !important;
+    gap: 8px;
+  }
+
+  .explore-more-btn,
+  .empty-listings-btn,
+  .cancel-booking-btn,
+  .host-add-btn,
+  .host-view-btn,
+  .host-edit-btn {
+    min-height: 34px;
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+
+  .host-view-btn,
+  .host-edit-btn {
+    width: auto;
+  }
+
+  .empty-listings,
+  .empty-bookings,
+  .empty-host-listings {
+    min-height: 40vh !important;
+    padding: 30px 12px !important;
+  }
+
+  .empty-listings h2,
+  .empty-bookings h2,
+  .empty-host-listings h2 {
+    font-size: 1.1rem !important;
+  }
+
+  .empty-listings p,
+  .empty-bookings p,
+  .empty-host-listings p {
+    font-size: 11.5px;
+  }
+
+  .flash-message {
+    width: calc(100% - 20px);
+    margin: 0.65rem auto;
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    font-size: 11.5px;
+  }
+
+  .footer {
+    margin-top: 30px;
+  }
+
+  .footer-container {
+    padding: 20px 14px 14px;
+  }
+
+  .footer-top {
+    gap: 18px;
+    padding-bottom: 18px;
+  }
+
+  .footer-logo {
+    font-size: 20px;
+  }
+
+  .footer-brand p,
+  .footer-col a,
+  .footer-bottom,
+  .footer-newsletter-form input,
+  .footer-newsletter-form button {
+    font-size: 11.5px;
+  }
+
+  .footer-newsletter h4,
+  .footer-col h4 {
+    font-size: 12px;
+  }
+
+  .footer-links-grid {
+    gap: 16px;
+    padding: 18px 0;
+  }
+
+  .footer-col li {
+    margin-bottom: 7px;
+  }
+
+  .footer-newsletter-form {
+    gap: 7px;
+  }
+
+  .footer-newsletter-form input,
+  .footer-newsletter-form button {
+    height: 38px;
+    border-radius: 8px;
+  }
+
+  .footer-bottom {
+    gap: 12px;
+    padding-top: 14px;
+  }
+
+  .footer-social a {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 430px) {
+  .container,
+  .listing-index-page,
+  .listing-show-page,
+  .bookings-page,
+  .host-listings-page {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .listing-index-page .row {
+    --bs-gutter-x: 9px;
+    --bs-gutter-y: 13px;
+  }
+
+  .img-wrapper {
+    height: 104px;
+  }
+
+  .listing-card-title {
+    font-size: 10.7px;
+  }
+
+  .listing-card-location,
+  .listing-card-meta,
+  .listing-card-price {
+    font-size: 9.8px;
+  }
+
+  .main-image {
+    height: 192px !important;
+  }
+
+  .booking-image-link,
+  .host-listing-image-link {
+    min-height: 122px !important;
+    height: 122px;
+  }
+}
+
+@media (max-width: 360px) {
+  .listing-index-page .row {
+    --bs-gutter-x: 8px;
+    --bs-gutter-y: 12px;
+  }
+
+  .img-wrapper {
+    height: 96px;
+  }
+
+  .listing-card-title {
+    font-size: 10.2px;
+  }
+
+  .listing-card-location,
+  .listing-card-meta,
+  .listing-card-price {
+    font-size: 9.4px;
+  }
+
+  .main-image {
+    height: 178px !important;
+  }
+
+  .booking-image-link,
+  .host-listing-image-link {
+    min-height: 112px !important;
+    height: 112px;
+  }
+}
+
+/* Laptop and desktop polish */
+@media (min-width: 577px) {
+  body {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .navbar.app-navbar {
+    min-height: 74px;
+    grid-template-columns: minmax(170px, 240px) minmax(420px, 720px) minmax(72px, 240px);
+    gap: clamp(18px, 2.4vw, 34px);
+    padding: 8px clamp(24px, 3vw, 44px);
+  }
+
+  .brand-logo {
+    width: clamp(176px, 15vw, 198px);
+  }
+
+  .nav-left {
+    min-width: 0;
+  }
+
+  .search-container {
+    max-width: 720px;
+    grid-template-columns: minmax(150px, 1.1fr) 1px minmax(118px, 0.8fr) 1px minmax(118px, 0.9fr) 42px;
+    padding: 5px;
+  }
+
+  .field {
+    min-height: 40px;
+    padding: 5px 12px;
+  }
+
+  .field label {
+    font-size: 10.5px;
+  }
+
+  .field input {
+    font-size: 13px;
+  }
+
+  .search-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hamburger-btn {
+    width: 44px;
+    height: 40px;
+    font-size: 17px;
+  }
+
+  .hamburger-dropdown {
+    width: 226px;
+    border-radius: 10px;
+  }
+
+  .hamburger-dropdown a,
+  .menu-user {
+    min-height: 40px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .category-bar {
+    top: 74px;
+    gap: clamp(20px, 2.4vw, 34px);
+    min-height: 60px;
+    padding: 10px clamp(24px, 3vw, 42px);
+  }
+
+  .category-item {
+    min-width: 58px;
+    gap: 5px;
+    font-size: 11.5px;
+  }
+
+  .category-item i {
+    font-size: 17px;
+  }
+
+  .category-item.active::after {
+    bottom: -10px;
+  }
+
+  .listing-index-page,
+  .listing-show-page,
+  .bookings-page,
+  .host-listings-page {
+    max-width: 1360px !important;
+    padding-left: clamp(24px, 3vw, 40px) !important;
+    padding-right: clamp(24px, 3vw, 40px) !important;
+  }
+
+  .listing-index-page {
+    margin-top: 20px !important;
+  }
+
+  .listing-index-page > .row {
+    --bs-gutter-x: 24px;
+    --bs-gutter-y: 30px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .listing-card {
+    border-radius: 10px !important;
+  }
+
+  .img-wrapper {
+    height: clamp(190px, 20vw, 225px);
+    border-radius: 10px;
+  }
+
+  .listing-img {
+    border-radius: 10px !important;
+  }
+
+  .wishlist-form {
+    top: 10px;
+    right: 10px;
+  }
+
+  .wishlist-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .listing-card-body {
+    padding-top: 11px !important;
+  }
+
+  .listing-card-top {
+    gap: 10px;
+  }
+
+  .listing-card-title {
+    font-size: 15px;
+    line-height: 1.32;
+  }
+
+  .listing-card-rating {
+    font-size: 13.5px;
+  }
+
+  .listing-card-location,
+  .listing-card-meta,
+  .listing-card-price {
+    font-size: 13.5px;
+    line-height: 1.38;
+  }
+
+  .listing-card-price {
+    margin-top: 7px;
+  }
+
+  .listing-title {
+    font-size: clamp(1.75rem, 2.25vw, 2.15rem);
+  }
+
+  .image-grid {
+    height: clamp(360px, 31vw, 440px);
+    border-radius: 12px;
+  }
+
+  .main-image,
+  .small-images {
+    height: clamp(360px, 31vw, 440px);
+  }
+
+  .about-section {
+    margin-top: 26px;
+    padding-bottom: 30px;
+  }
+
+  .about-top {
+    gap: 24px;
+    margin-bottom: 26px;
+  }
+
+  .price-box {
+    min-width: 168px;
+    padding: 14px 18px;
+  }
+
+  .price-box h2 {
+    font-size: 1.42rem;
+  }
+
+  .listing-highlights {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .highlight-item {
+    gap: 13px;
+    padding: 16px;
+  }
+
+  .highlight-item span {
+    font-size: 1.45rem;
+  }
+
+  .about-description h4,
+  .map-section h4,
+  .amenities-section h3,
+  .reviews-wrapper h3,
+  .all-reviews h3,
+  .review-form-box h3 {
+    font-size: 1.35rem;
+  }
+
+  .about-description p {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .listing-content-row {
+    margin-top: 34px !important;
+    margin-bottom: 34px !important;
+  }
+
+  .booking-sticky {
+    top: 96px;
+  }
+
+  .booking-card {
+    padding: 22px;
+    border-radius: 12px;
+  }
+
+  .booking-card h3 {
+    font-size: 1.35rem;
+  }
+
+  .booking-card .form-control,
+  .booking-card .form-select {
+    min-height: 48px;
+    font-size: 14px;
+  }
+
+  .reserve-btn,
+  .review-submit-btn,
+  .auth-btn {
+    min-height: 48px;
+  }
+
+  .amenities-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .amenity-card {
+    min-height: 92px;
+    padding: 16px;
+  }
+
+  #map {
+    height: clamp(320px, 29vw, 390px);
+  }
+
+  .review-form-box {
+    padding: 22px;
+  }
+
+  .review-card .card-body {
+    padding: 17px;
+  }
+
+  .auth-shell {
+    width: min(100%, 820px);
+  }
+
+  .listing-form-shell {
+    width: min(100%, 800px);
+  }
+
+  .bookings-page,
+  .host-listings-page {
+    padding-top: 34px;
+    padding-bottom: 54px;
+  }
+
+  .wishlist-header,
+  .bookings-header,
+  .host-listings-header {
+    margin-bottom: 28px;
+  }
+
+  .booking-card-item {
+    grid-template-columns: minmax(230px, 285px) 1fr;
+    border-radius: 12px;
+  }
+
+  .host-listing-card {
+    grid-template-columns: minmax(220px, 270px) 1fr;
+    border-radius: 10px;
+  }
+
+  .booking-image-link,
+  .host-listing-image-link {
+    min-height: 230px;
+  }
+
+  .booking-content,
+  .host-listing-content {
+    padding: 20px;
+  }
+
+  .footer {
+    margin-top: 60px;
+  }
+
+  .footer-container {
+    max-width: 1360px;
+    padding-left: clamp(24px, 3vw, 40px);
+    padding-right: clamp(24px, 3vw, 40px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .listing-index-page,
+  .listing-show-page,
+  .bookings-page,
+  .host-listings-page,
+  .footer-container {
+    max-width: 1400px !important;
+  }
+
+  .listing-index-page > .row {
+    --bs-gutter-x: 26px;
+    --bs-gutter-y: 34px;
+  }
+
+  .img-wrapper {
+    height: clamp(205px, 16vw, 238px);
+  }
+
+  .listing-card-title {
+    font-size: 15.5px;
+  }
+
+  .listing-card-location,
+  .listing-card-meta,
+  .listing-card-price {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 1199px) {
+  .listing-index-page > .row {
+    --bs-gutter-x: 22px;
+    --bs-gutter-y: 28px;
+  }
+
+  .booking-meta-grid,
+  .host-listing-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1040px) {
+  .navbar.app-navbar {
+    grid-template-columns: minmax(150px, 200px) minmax(390px, 1fr) 54px;
+    gap: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .brand-logo {
+    width: 174px;
+  }
+
+  .search-container {
+    max-width: 610px;
+  }
+
+  .category-bar {
+    gap: 22px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }

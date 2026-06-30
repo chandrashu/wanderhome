@@ -2434,3 +2434,131 @@
     padding-right: 24px;
   }
 }
+
+@media (min-width: 992px) and (max-height: 840px) {
+  .listing-index-page {
+    margin-top: 12px !important;
+  }
+
+  .listing-index-page > .row {
+    --bs-gutter-x: 18px;
+    --bs-gutter-y: 20px;
+  }
+
+  .img-wrapper {
+    height: clamp(150px, 13vw, 176px);
+  }
+
+  .listing-card-body {
+    padding-top: 8px !important;
+  }
+
+  .listing-card-title {
+    font-size: 13.5px;
+    line-height: 1.25;
+  }
+
+  .listing-card-location,
+  .listing-card-meta,
+  .listing-card-price {
+    font-size: 12.2px;
+    line-height: 1.28;
+  }
+
+  .listing-card-price {
+    margin-top: 5px;
+  }
+
+  .listing-show-page {
+    padding-top: 8px !important;
+  }
+
+  .listing-show-page > .listing-title {
+    margin-top: 0 !important;
+    margin-bottom: 4px !important;
+    font-size: 1.45rem !important;
+  }
+
+  .listing-show-page > .text-muted {
+    margin-bottom: 10px !important;
+    font-size: 13px;
+  }
+
+  .listing-show-page > .row.mb-4 {
+    margin-bottom: 14px !important;
+  }
+
+  .image-grid,
+  .main-image,
+  .small-images {
+    height: clamp(250px, 32vh, 285px);
+  }
+
+  .about-section {
+    margin-top: 12px;
+    padding-bottom: 18px;
+  }
+
+  .about-top {
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .about-top .listing-title {
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
+    font-size: 1.25rem !important;
+  }
+
+  .listing-location {
+    font-size: 13px;
+  }
+
+  .price-box {
+    min-width: 142px;
+    padding: 8px 12px;
+  }
+
+  .price-box h2 {
+    font-size: 1.08rem;
+  }
+
+  .listing-highlights {
+    gap: 10px;
+    margin: 12px 0 0;
+  }
+
+  .highlight-item {
+    gap: 10px;
+    min-height: 68px;
+    padding: 10px 12px;
+  }
+
+  .highlight-item span {
+    font-size: 1.15rem;
+  }
+
+  .highlight-item h6 {
+    margin-bottom: 2px;
+    font-size: 13px;
+  }
+
+  .highlight-item p {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 11.5px;
+    line-height: 1.32;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .about-description {
+    padding-top: 18px;
+  }
+
+  .listing-content-row {
+    margin-top: 24px !important;
+  }
+}

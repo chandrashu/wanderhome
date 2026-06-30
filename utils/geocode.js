@@ -2,6 +2,17 @@ const axios = require("axios");
 const ExpressError = require("./ExpressError");
 
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/search";
+const DEFAULT_GEOMETRY = {
+  type: "Point",
+  coordinates: [77.2090, 28.6139],
+};
+const allowGeocodeFallback =
+  process.env.NODE_ENV !== "production" || process.env.GEOCODING_FALLBACK === "true";
+
+const getFallbackGeometry = () => ({
+  type: DEFAULT_GEOMETRY.type,
+  coordinates: [...DEFAULT_GEOMETRY.coordinates],
+});
 
 const geocodeLocation = async ({ location, country }) => {
   const query = [location, country].filter(Boolean).join(", ");
@@ -46,7 +57,15 @@ const geocodeLocation = async ({ location, country }) => {
     };
   } catch (error) {
     if (error instanceof ExpressError) {
+      if (allowGeocodeFallback) {
+        return getFallbackGeometry();
+      }
+
       throw error;
+    }
+
+    if (allowGeocodeFallback) {
+      return getFallbackGeometry();
     }
 
     throw new ExpressError(

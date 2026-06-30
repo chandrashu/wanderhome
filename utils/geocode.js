@@ -7,7 +7,7 @@ const DEFAULT_GEOMETRY = {
   coordinates: [77.2090, 28.6139],
 };
 const allowGeocodeFallback =
-  process.env.NODE_ENV !== "production" || process.env.GEOCODING_FALLBACK === "true";
+  process.env.GEOCODING_FALLBACK !== "false";
 
 const getFallbackGeometry = () => ({
   type: DEFAULT_GEOMETRY.type,

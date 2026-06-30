@@ -23,3 +23,5 @@ services:
         sync: false
       - key: GEOCODING_USER_AGENT
         sync: false
+      - key: GEOCODING_FALLBACK
+        value: "true"
